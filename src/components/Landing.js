@@ -1,36 +1,12 @@
 import React from "react";
-// import { makeStyles } from "@material-ui/core/styles";
-import { FormControl, InputLabel, Input } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import { FormControl, InputLabel, Input, Button } from "@material-ui/core";
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     display: "flex",
-//     flexWrap: "wrap",
-//   },
-//   margin: {
-//     margin: theme.spacing(1),
-//   },
-//   withoutLabel: {
-//     marginTop: theme.spacing(3),
-//   },
-//   textField: {
-//     width: "25ch",
-//   },
-// }));
-
-export default function Landing() {
-  //   const classes = useStyles();
-  const [values, setValues] = React.useState({
-    amount: "",
-    password: "",
-    weight: "",
-    weightRange: "",
-    showPassword: false,
-  });
-
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
+export default function Landing(props) {
+  const handleClick = (e) => {
+    console.log("clicked");
   };
+
   return (
     <div className="landing">
       <h1 className="header">GG</h1>
@@ -40,12 +16,12 @@ export default function Landing() {
           <InputLabel htmlFor="standard-adornment-amount">
             Search game...
           </InputLabel>
-          <Input
-            id="standard-adornment-amount"
-            value={values.amount}
-            onChange={handleChange("amount")}
-            //   startAdornment={<InputAdornment position="start">$</InputAdornment>}
-          />
+          <Input id="standard-adornment-amount" onChange={props.handleChange} />
+          <Button className="button" onClick={handleClick}>
+            <Link className="link" to="results">
+              search
+            </Link>
+          </Button>
         </FormControl>
       </div>
     </div>

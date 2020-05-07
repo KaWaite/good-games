@@ -1,9 +1,11 @@
 import React from "react";
+import ResultsTable from "./ResultsTable";
 
-export default function Results() {
+export default function Results(props) {
   return (
-    <div>
-      <h1>Results Page from search</h1>
+    <div className="main">
+      <h2>Results for: {props.Search}</h2>
+      <ResultsTable Search={props.Search} />
     </div>
   );
 }

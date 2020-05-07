@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -30,9 +32,11 @@ export default function DenseAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit">
-            GoodGames
-          </Typography>
+          <Link className="link" to="/">
+            <Typography variant="h6" color="inherit">
+              GoodGames
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </div>
