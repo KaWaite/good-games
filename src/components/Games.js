@@ -2,25 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Table from "./Table";
 
-export default function Results(props) {
-  const [results, setResults] = useState([]);
-  let term = props.Search;
+export default function Games() {
+  const [games, setGames] = useState([]);
 
   useEffect(() => {
-    fetchResults();
+    fetchGames();
   }, []);
 
-  const fetchResults = async () => {
-    console.log(term);
-    const data = await axios.get(`/search?title=${term}`);
+  const fetchGames = async () => {
+    const data = await axios.get("/games");
     console.log(data.data);
-    setResults(data.data);
+    setGames(data.data);
   };
 
   return (
     <div className="main">
       {/* <h2>Results for: {props.Search}</h2> */}
-      <Table results={results} Search={term} />
+      <Table results={games} />
       {/* <ul>
         {results.map((item) => (
           <li key={item.title}>{item.title}</li>

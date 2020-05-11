@@ -263,7 +263,7 @@ export default function EnhancedTable(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(props.results, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);

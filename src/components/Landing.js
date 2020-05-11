@@ -3,10 +3,6 @@ import { Link } from "react-router-dom";
 import { FormControl, InputLabel, Input, Button } from "@material-ui/core";
 
 export default function Landing(props) {
-  const handleClick = (e) => {
-    console.log("clicked");
-  };
-
   return (
     <div className="landing">
       <h1 className="header">GG</h1>
@@ -17,9 +13,14 @@ export default function Landing(props) {
             Search game...
           </InputLabel>
           <Input id="standard-adornment-amount" onChange={props.handleChange} />
-          <Button className="button" onClick={handleClick}>
+          <Button className="button">
             <Link className="link" to="results">
               search
+            </Link>
+          </Button>
+          <Button className="button">
+            <Link className="link" to="games">
+              see all games
             </Link>
           </Button>
         </FormControl>
