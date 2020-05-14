@@ -16,25 +16,10 @@ import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
-function createData(title, release_date, developer) {
-  return { title, release_date, developer };
-}
-
-const rows = [
-  createData("Cupcake", 305, "Naughty Dog"),
-  createData("Donut", 452, "Naughty Dog"),
-  createData("Eclair", 262, "Naughty Dog"),
-  createData("Frozen yoghurt", 159, "Naughty Dog"),
-  createData("Gingerbread", 356, "Naughty Dog"),
-  createData("Honeycomb", 408, "Naughty Dog"),
-  createData("Ice cream sandwich", 237, "Naughty Dog"),
-  createData("Jelly Bean", 375, "Naughty Dog"),
-  createData("KitKat", 518, "Naughty Dog"),
-  createData("Lollipop", 392, "Naughty Dog"),
-  createData("Marshmallow", 318, "Naughty Dog"),
-  createData("Nougat", 360, "Naughty Dog"),
-  createData("Oreo", 437, "Naughty Dog"),
-];
+const rows = (props) => {
+  console.log(props.results);
+  return props.results;
+};
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -152,15 +137,26 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <Toolbar>
-      <Typography
-        className={classes.title}
-        variant="h6"
-        id="tableTitle"
-        component="div"
-      >
-        Results:
-        <br /> <b>{props.Search}</b>
-      </Typography>
+      {props.Search ? (
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          Results:
+          <br /> <b>{props.Search}</b>
+        </Typography>
+      ) : (
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+        >
+          All Games
+        </Typography>
+      )}
       <Tooltip title="Filter list">
         <IconButton aria-label="filter list">
           <FilterListIcon />
@@ -198,10 +194,10 @@ const useStyles = makeStyles((theme) => ({
 export default function EnhancedTable(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("title");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -301,7 +297,7 @@ export default function EnhancedTable(props) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25, 50]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
