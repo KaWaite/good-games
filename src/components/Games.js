@@ -17,13 +17,7 @@ export default function Games() {
 
   return (
     <div className="main">
-      {/* <h2>Results for: {props.Search}</h2> */}
       <Table results={games} />
-      {/* <ul>
-        {results.map((item) => (
-          <li key={item.title}>{item.title}</li>
-        ))}
-      </ul> */}
     </div>
   );
 }

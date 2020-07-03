@@ -7,6 +7,7 @@ import TopBar from "./components/TopBar";
 import Landing from "./components/Landing";
 import Results from "./components/Results";
 import Games from "./components/Games";
+import Login from "./components/Login";
 import Error404 from "./components/Error404";
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <TopBar />
+        <TopBar handleChange={handleChange} />
         <Switch>
           <Route
             exact
@@ -32,6 +33,7 @@ function App() {
           />
           <Route path="/results" render={() => <Results Search={Search} />} />
           <Route path="/games" render={() => <Games />} />
+          <Route path="/login" render={() => <Login />} />
           <Route render={() => <Error404 />} />
         </Switch>
       </div>

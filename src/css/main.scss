@@ -1,19 +1,19 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;700&family=Montserrat+Subrayada&display=swap");
 
 body {
   margin: 0;
-  font-family: Montserrat;
+  font-family: "Kanit", sans-serif;
   min-height: 100vh;
   font-size: 18px;
   color: rgb(44, 43, 43);
-  background: linear-gradient(160deg, #81bb8b 0%, #73449c 100%);
+  background: linear-gradient(160deg, #adfdbb 0%, #ad70e2 100%);
 }
 
 .App {
-  text-align: center;
+  // text-align: center;
 
-  .top-bar {
-    background: rgba(150, 143, 143, 0.5);
+  .appbar {
+    background: rgba(255, 255, 255, 0.61);
     color: rgb(44, 43, 43);
   }
 
@@ -22,35 +22,62 @@ body {
     color: rgb(44, 43, 43);
     font-weight: 700;
   }
+
+  .content {
+    max-width: 88%;
+    margin: 0 auto;
+    color: rgb(233, 230, 230);
+  }
 }
 
 .landing {
-  max-width: 80%;
-  margin: 0 auto;
+  background-image: url(../images/landingpage.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: calc(100vh - 49px);
+  padding-top: 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  resize: vertical;
 
-  .header {
-    text-align: left;
-    font-size: 40px;
-    text-decoration: underline;
-  }
-  .inner {
-    text-align: center;
-    margin: 5em auto;
+  .content {
+    .left {
+      p {
+        font-size: 18px;
+      }
 
-    .search {
-      max-width: 90%;
-      margin-top: 2em;
-    }
-
-    .button {
-      margin: 1em;
+      h2 {
+        font-size: 28px;
+      }
     }
   }
 }
+
+// .landing {
+//   max-width: 80%;
+//   margin: 0 auto;
+//   text-align: center;
+
+//   .content {
+//     margin: 5em auto;
+
+//     .search {
+//       max-width: 90%;
+//       margin-top: 2em;
+//     }
+
+//     .button {
+//       margin: 1em;
+//     }
+//   }
+// }
 
 .main {
   max-width: 70%;
   margin: 0 auto;
+  text-align: center;
 }
 
 @media only screen and(min-width: 700px) {
@@ -58,9 +85,9 @@ body {
     font-size: 20px;
   }
 
-  .landing {
-    margin-top: 3em;
-  }
+  // .landing {
+  //   margin-top: 3em;
+  // }
 
   .search {
     width: 400px !important;
@@ -69,35 +96,44 @@ body {
 
 @media only screen and(min-width: 1024px) {
   .landing {
-    margin-top: 4em;
-    position: relative;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+  // .landing {
+  //   margin-top: 4em;
+  //   position: relative;
 
-    .header {
-      margin: 1em;
-    }
+  //   .header {
+  //     margin: 1em;
+  //   }
 
-    .inner {
-      display: grid;
-      grid-template-columns: auto 55%;
-      margin: 7em auto !important;
+  //   .content {
+  //     display: grid;
+  //     grid-template-columns: auto 55%;
+  //     margin: 7em auto !important;
 
-      h2 {
-        text-align: left;
-        padding: 0 2em;
-      }
+  //     h2 {
+  //       text-align: left;
+  //       padding: 0 2em;
+  //     }
 
-      .search {
-        width: 300px !important;
-        align-self: center;
-        justify-self: center;
-        margin-left: 4em;
-      }
-    }
+  //     .search {
+  //       width: 300px !important;
+  //       align-self: center;
+  //       justify-self: center;
+  //       margin-left: 4em;
+  //     }
+  //   }
+  // }
+
+  .appbar-content {
+    width: 80%;
+    margin: 0 auto;
   }
 }
 
 @media only screen and (min-width: 1300px) {
-  .inner {
+  .content {
     width: 85%;
   }
 }
