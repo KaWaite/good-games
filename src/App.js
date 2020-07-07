@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/main.scss";
 
 // Component imports
 import TopBar from "./components/TopBar";
-import Landing from "./components/Landing";
+import Landing from "./components/LandingPage/Landing";
 import Results from "./components/Results";
 import Games from "./components/Games";
 import Login from "./components/Login";

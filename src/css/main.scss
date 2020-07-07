@@ -5,7 +5,6 @@ body {
   font-family: "Kanit", sans-serif;
   min-height: 100vh;
   font-size: 18px;
-  // color: rgb(44, 43, 43);
   background: linear-gradient(160deg, #adfdbb 0%, #ad70e2 100%);
 }
 
@@ -13,8 +12,12 @@ body {
   // text-align: center;
 
   .appbar {
-    background: rgba(255, 255, 255, 0.61);
+    background: rgb(255, 255, 255);
     color: rgb(44, 43, 43);
+
+    .appbar-content {
+      max-width: 1100px;
+    }
   }
 
   .link {
@@ -31,34 +34,47 @@ body {
 }
 
 .landing {
-  background-image: url(../images/landingpage.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: calc(100vh - 49px);
-  padding-top: 1px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  resize: vertical;
+  height: 100%;
 
-  .content {
-    .left {
-      margin-bottom: 35px;
-      p {
-        font-size: 18px;
+  .welcome {
+    background-image: url(../images/landingpage.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 520px;
+    padding-top: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    resize: vertical;
+
+    .content {
+      .left {
+        margin-bottom: 35px;
+        p {
+          font-size: 18px;
+        }
+
+        h2 {
+          font-size: 28px;
+        }
       }
 
-      h2 {
-        font-size: 28px;
+      .search-container {
+        .link {
+          color: white;
+        }
       }
     }
+  }
 
-    .search-container {
-      .link {
-        color: white;
-      }
-    }
+  .boiler {
+    height: 435px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    resize: vertical;
+    text-align: center;
   }
 }
 
@@ -71,17 +87,38 @@ body {
 @media only screen and(min-width: 700px) {
   body {
     font-size: 20px;
+
+    .landing {
+      .welcome {
+        height: 625px;
+      }
+    }
   }
 
   .search {
-    width: 400px !important;
+    // width: 400px !important;
   }
 }
 
 @media only screen and(min-width: 1024px) {
   .landing {
-    max-width: 80%;
-    margin: 0 auto;
+    .welcome {
+      // max-width: 80%;
+      // margin: 0 auto;
+      .content {
+        width: 80%;
+
+        .left {
+          float: left;
+        }
+
+        .search-container {
+          float: right;
+          width: 300px;
+          text-align: center;
+        }
+      }
+    }
   }
 
   .appbar-content {
@@ -90,8 +127,22 @@ body {
   }
 }
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1200px) {
+  .welcome {
+    .content {
+      max-width: 1100px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1500px) {
   .content {
-    width: 85%;
+    .left {
+      padding-left: 75px;
+    }
+
+    .search-container {
+      padding-right: 75px;
+    }
   }
 }

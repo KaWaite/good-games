@@ -26,17 +26,3 @@ export default function CustomizedInputBase(props) {
     </Paper>
   );
 }
-
-{
-  /* <form className={classes.root} noValidate autoComplete="off">
-            <TextField
-              id="filled-basic"
-              variant="filled"
-              color="primary"
-              label="Search game.."
-              onChange={props.handleChange}
-              className="search-input"
-            />
-            
-          </form> */
-}

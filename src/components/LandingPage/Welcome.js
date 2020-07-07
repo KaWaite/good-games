@@ -1,15 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Search from "./Search";
+import { Button, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  Button,
-  Typography,
-  TextField,
-} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Landing(props) {
+export default function Welcome(props) {
   const classes = useStyles();
 
   useEffect(() => {
@@ -28,7 +21,7 @@ export default function Landing(props) {
   }, []);
 
   return (
-    <div className="landing">
+    <div className="welcome">
       <div className="content">
         <div className="left">
           <Typography variant="subtitle1">Welcome to</Typography>
@@ -61,27 +54,4 @@ export default function Landing(props) {
       </div>
     </div>
   );
-}
-
-{
-  /* <h1 className="header">GG</h1>
-      <div className="content">
-        <h2>Search the Good Games database to get started.</h2>
-        <FormControl fullWidth className="search">
-          <InputLabel htmlFor="standard-adornment-amount">
-            Search game...
-          </InputLabel>
-          <Input id="standard-adornment-amount" onChange={props.handleChange} />
-          <Button className="button">
-            <Link className="link" to="results">
-              search
-            </Link>
-          </Button>
-          <Button className="button">
-            <Link className="link" to="games">
-              see all games
-            </Link>
-          </Button>
-        </FormControl>
-      </div> */
 }
