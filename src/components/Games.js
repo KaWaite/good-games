@@ -10,8 +10,8 @@ export default function Games() {
   }, []);
 
   const fetchGames = async () => {
-    const data = await axios.get("/games");
-    console.log(data.data);
+    const data = await axios.get("/game/all");
+    console.log(data.data[0]);
     setGames(data.data);
   };
 

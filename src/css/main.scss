@@ -5,7 +5,7 @@ body {
   font-family: "Kanit", sans-serif;
   min-height: 100vh;
   font-size: 18px;
-  color: rgb(44, 43, 43);
+  // color: rgb(44, 43, 43);
   background: linear-gradient(160deg, #adfdbb 0%, #ad70e2 100%);
 }
 
@@ -44,6 +44,7 @@ body {
 
   .content {
     .left {
+      margin-bottom: 35px;
       p {
         font-size: 18px;
       }
@@ -52,27 +53,14 @@ body {
         font-size: 28px;
       }
     }
+
+    .search-container {
+      .link {
+        color: white;
+      }
+    }
   }
 }
-
-// .landing {
-//   max-width: 80%;
-//   margin: 0 auto;
-//   text-align: center;
-
-//   .content {
-//     margin: 5em auto;
-
-//     .search {
-//       max-width: 90%;
-//       margin-top: 2em;
-//     }
-
-//     .button {
-//       margin: 1em;
-//     }
-//   }
-// }
 
 .main {
   max-width: 70%;
@@ -85,10 +73,6 @@ body {
     font-size: 20px;
   }
 
-  // .landing {
-  //   margin-top: 3em;
-  // }
-
   .search {
     width: 400px !important;
   }
@@ -99,32 +83,6 @@ body {
     max-width: 80%;
     margin: 0 auto;
   }
-  // .landing {
-  //   margin-top: 4em;
-  //   position: relative;
-
-  //   .header {
-  //     margin: 1em;
-  //   }
-
-  //   .content {
-  //     display: grid;
-  //     grid-template-columns: auto 55%;
-  //     margin: 7em auto !important;
-
-  //     h2 {
-  //       text-align: left;
-  //       padding: 0 2em;
-  //     }
-
-  //     .search {
-  //       width: 300px !important;
-  //       align-self: center;
-  //       justify-self: center;
-  //       margin-left: 4em;
-  //     }
-  //   }
-  // }
 
   .appbar-content {
     width: 80%;

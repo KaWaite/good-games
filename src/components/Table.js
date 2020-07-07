@@ -17,7 +17,6 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FilterListIcon from "@material-ui/icons/FilterList";
 
 const rows = (props) => {
-  console.log(props.results);
   return props.results;
 };
 
@@ -262,17 +261,17 @@ export default function EnhancedTable(props) {
               {stableSort(props.results, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.title);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row.name)}
+                      onClick={(event) => handleClick(event, row.title)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.id}
                       selected={isItemSelected}
                     >
                       <TableCell
@@ -284,7 +283,7 @@ export default function EnhancedTable(props) {
                         {row.title}
                       </TableCell>
                       <TableCell align="right">{row.release_date}</TableCell>
-                      <TableCell align="right">{row.developer}</TableCell>
+                      <TableCell align="right">{row.publisher}</TableCell>
                     </TableRow>
                   );
                 })}

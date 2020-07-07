@@ -11,7 +11,7 @@ export default function Results(props) {
   }, []);
 
   const fetchResults = async () => {
-    const data = await axios.get(`/search?title=${term}`);
+    const data = await axios.post("/game/search", { term });
     setResults(data.data);
   };
 
