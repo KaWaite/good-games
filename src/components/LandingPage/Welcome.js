@@ -18,6 +18,7 @@ export default function Welcome(props) {
 
   useEffect(() => {
     props.resetSearch();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -31,25 +32,27 @@ export default function Welcome(props) {
         </div>
         <div className="search-container">
           <p>Search the Good Games database to get started.</p>
-          <form
-            className={classes.root}
-            action="results"
-            onSubmit={props.onSubmit}
-            noValidate
-            autoComplete="off"
-          >
-            <Search onChange={props.handleChange} />
-            <Button className="button" variant="contained" color="secondary">
-              <Link className="link" to="results">
-                search
-              </Link>
+          <div className={classes.root}>
+            <Search handleChange={props.handleChange} />
+            <Button
+              className="button"
+              variant="contained"
+              color="secondary"
+              component={Link}
+              to="results"
+            >
+              search
             </Button>
-            <Button className="button" variant="contained" color="primary">
-              <Link className="link" to="games">
-                see all games
-              </Link>
+            <Button
+              className="button"
+              variant="contained"
+              color="primary"
+              component={Link}
+              to="games"
+            >
+              see all games
             </Button>
-          </form>
+          </div>
         </div>
       </div>
     </div>

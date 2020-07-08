@@ -16,7 +16,7 @@ export default function Login() {
   const classes = useStyles();
 
   return (
-    <div className="main">
+    <div className="content">
       <Paper className="form">
         <h1>Login</h1>
         <form className={classes.root} noValidate autoComplete="off">

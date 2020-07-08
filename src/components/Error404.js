@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Error404() {
   return (
-    <div className="main">
+    <div className="content">
       <h1>
         I am sorry the page was not found. Please try another page or go back{" "}
         <Link className="link" to="/">

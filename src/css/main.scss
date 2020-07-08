@@ -3,13 +3,26 @@
 body {
   margin: 0;
   font-family: "Kanit", sans-serif;
-  min-height: 100vh;
+  min-height: 100%;
   font-size: 18px;
   background: linear-gradient(160deg, #adfdbb 0%, #ad70e2 100%);
+  position: relative;
+}
+
+ul {
+  list-style: none;
+
+  h4 {
+    margin: 0;
+  }
 }
 
 .App {
-  // text-align: center;
+  min-height: 100vh;
+  position: relative;
+  display: block;
+  padding-bottom: 300px;
+  overflow: hidden;
 
   .appbar {
     background: rgb(255, 255, 255);
@@ -30,6 +43,32 @@ body {
     max-width: 88%;
     margin: 0 auto;
     color: rgb(233, 230, 230);
+  }
+
+  .footer {
+    border-top: 1px solid rgb(70, 65, 65);
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .footer-content {
+      flex: 1;
+      padding: 0 20px;
+    }
+
+    .footer-1,
+    .footer-2 {
+      flex: 1 0 0;
+    }
+
+    .footer-3 {
+      flex: 1 100%;
+    }
   }
 }
 
@@ -68,7 +107,7 @@ body {
     }
   }
 
-  .boiler {
+  .slogan {
     height: 435px;
     display: flex;
     flex-direction: column;
@@ -101,6 +140,10 @@ body {
 }
 
 @media only screen and(min-width: 1024px) {
+  .App {
+    padding-bottom: 150px;
+  }
+
   .landing {
     .welcome {
       // max-width: 80%;
@@ -124,6 +167,14 @@ body {
   .appbar-content {
     width: 80%;
     margin: 0 auto;
+  }
+
+  .footer {
+    margin: 0 auto !important;
+
+    .footer-3 {
+      flex: 1 0 0 !important;
+    }
   }
 }
 

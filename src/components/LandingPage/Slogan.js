@@ -1,11 +1,11 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
 
-export default function Boiler() {
+export default function Slogan() {
   return (
-    <div className="boiler">
+    <div className="slogan">
       <div className="content">
-        <Typography variant="h2">This is something</Typography>
+        <Typography variant="h3">Games are where we go to dream</Typography>
       </div>
     </div>
   );

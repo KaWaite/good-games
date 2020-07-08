@@ -1,6 +1,7 @@
 import React from "react";
 import Welcome from "./Welcome";
-import Boiler from "./Boiler";
+import Slogan from "./Slogan";
+import AccountBenefits from "./AccountBenefits";
 
 export default function Landing(props) {
   return (
@@ -9,7 +10,8 @@ export default function Landing(props) {
         resetSearch={props.resetSearch}
         handleChange={props.handleChange}
       />
-      <Boiler />
+      <Slogan />
+      <AccountBenefits />
     </div>
   );
 }

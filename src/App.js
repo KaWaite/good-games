@@ -8,6 +8,7 @@ import Landing from "./components/LandingPage/Landing";
 import Results from "./components/Results";
 import Games from "./components/Games";
 import Login from "./components/Login";
+import Footer from "./components/Footer";
 import Error404 from "./components/Error404";
 
 import Test from "./components/Test";
@@ -26,7 +27,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <TopBar handleChange={handleChange} />
+        <TopBar />
         <Switch>
           <Route
             exact
@@ -41,6 +42,7 @@ function App() {
           <Route path="/test" render={() => <Test />} />
           <Route render={() => <Error404 />} />
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

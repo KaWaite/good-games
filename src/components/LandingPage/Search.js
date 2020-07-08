@@ -21,7 +21,7 @@ export default function CustomizedInputBase(props) {
         className={classes.input}
         placeholder="Search game..."
         inputProps={{ "aria-label": "search game" }}
-        onChange={props.onChange}
+        onChange={props.handleChange}
       />
     </Paper>
   );

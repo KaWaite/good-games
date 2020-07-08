@@ -16,7 +16,7 @@ export default function Games() {
   };
 
   return (
-    <div className="main">
+    <div className="content">
       <Table results={games} />
     </div>
   );

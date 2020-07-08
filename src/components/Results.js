@@ -8,6 +8,7 @@ export default function Results(props) {
 
   useEffect(() => {
     fetchResults();
+    // eslint-disable-next-line
   }, []);
 
   const fetchResults = async () => {
@@ -16,7 +17,7 @@ export default function Results(props) {
   };
 
   return (
-    <div className="main">
+    <div className="content">
       <Table results={results} Search={term} />
     </div>
   );

@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function GameWikiPortal() {
+export default function AccountBenefits() {
   return (
     <div className="content">
-      <h1>Game Wikis this way</h1>
+      <h1>Benefits</h1>
     </div>
   );
 }
