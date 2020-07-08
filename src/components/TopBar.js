@@ -6,8 +6,10 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+// import IconButton from "@material-ui/core/IconButton";
+// import MenuIcon from "@material-ui/icons/Menu";
+
+import logo from "../images/logo.svg";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,38 +20,44 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    textDecoration: "none",
   },
 }));
 
-export default function ButtonAppBar() {
+export default function TopBar() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className="appbar">
-        <Toolbar variant="dense" className="appbar-content">
-          <IconButton
+      <AppBar position="static" className="topbar">
+        <Toolbar variant="dense" className="topbar-content">
+          <img src={logo} alt="blah" className={`${classes.menuButton} logo`} />
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
-            color="inherit"
+            color="primary"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="primary" className={classes.title}>
-            <Link to="/" className="link">
-              GoodGames
-            </Link>
+          </IconButton> */}
+          <Typography
+            variant="h6"
+            color="primary"
+            className={classes.title}
+            component={Link}
+            to="/"
+          >
+            GoodGames
           </Typography>
-          <Button className="button">
-            <Link className="link" to="/join-the-dark-side">
-              Join
-            </Link>
+          <Button
+            color="primary"
+            component={Link}
+            to="/account/join-the-dark-side"
+          >
+            Join
           </Button>
-          <Button className="button">
-            <Link className="link" to="/login">
-              Login
-            </Link>
+          <Button color="primary" component={Link} to="/account/login">
+            Login
           </Button>
         </Toolbar>
       </AppBar>

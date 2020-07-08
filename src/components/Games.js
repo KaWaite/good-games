@@ -7,6 +7,8 @@ export default function Games() {
 
   useEffect(() => {
     fetchGames();
+    window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, []);
 
   const fetchGames = async () => {

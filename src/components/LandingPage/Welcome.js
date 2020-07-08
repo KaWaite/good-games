@@ -18,6 +18,7 @@ export default function Welcome(props) {
 
   useEffect(() => {
     props.resetSearch();
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, []);
 
@@ -26,9 +27,7 @@ export default function Welcome(props) {
       <div className="content">
         <div className="left">
           <Typography variant="subtitle1">Welcome to</Typography>
-          <Typography variant="h1" component="h2">
-            GOOD GAMES
-          </Typography>
+          <Typography variant="h1">GOOD GAMES</Typography>
         </div>
         <div className="search-container">
           <p>Search the Good Games database to get started.</p>

@@ -8,6 +8,7 @@ export default function Results(props) {
 
   useEffect(() => {
     fetchResults();
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, []);
 

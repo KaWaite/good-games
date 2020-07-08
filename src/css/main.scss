@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@100;400;700&family=Montserrat+Subrayada&display=swap");
 
+.logo {
+  height: 48px;
+}
+
 body {
   margin: 0;
   font-family: "Kanit", sans-serif;
@@ -17,6 +21,30 @@ ul {
   }
 }
 
+.container {
+  margin: 0 auto 100px auto;
+  max-width: 1100px;
+}
+
+.form-container {
+  height: 100%;
+  width: 100vw;
+  margin: 100px auto 0 auto;
+
+  .form {
+    padding: 10px 10px 40px 10px;
+    margin: 0 auto;
+    max-width: 500px;
+    text-align: center;
+
+    h1 {
+      font-size: 50px;
+      margin: 20px 0;
+    }
+  }
+}
+
+// Main component styles
 .App {
   min-height: 100vh;
   position: relative;
@@ -24,19 +52,13 @@ ul {
   padding-bottom: 300px;
   overflow: hidden;
 
-  .appbar {
-    background: rgb(255, 255, 255);
-    color: rgb(44, 43, 43);
+  // Topbar component styles
+  .topbar {
+    background: white;
 
-    .appbar-content {
+    .topbar-content {
       max-width: 1100px;
     }
-  }
-
-  .link {
-    text-decoration: none;
-    color: rgb(44, 43, 43);
-    font-weight: 700;
   }
 
   .content {
@@ -45,19 +67,89 @@ ul {
     color: rgb(233, 230, 230);
   }
 
+  // Landing Page component styles
+  .landing {
+    height: 100%;
+
+    h1 {
+      font-size: 30px;
+    }
+
+    // Landing - Welcome component styles
+    .welcome {
+      background-image: url(../images/tlou2.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 520px;
+      padding-top: 1px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      resize: vertical;
+
+      .content {
+        .left {
+          margin-bottom: 35px;
+          p {
+            font-size: 18px;
+          }
+
+          h2 {
+            font-size: 28px;
+          }
+        }
+      }
+    }
+
+    // Landing - Slogan component styles
+    .slogan {
+      height: 435px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      resize: vertical;
+      text-align: center;
+
+      h3 {
+        margin-bottom: 15px;
+      }
+
+      .slogan-icon {
+        height: 100px;
+        margin-top: 15px;
+      }
+    }
+
+    // Landing - AccountBenefits component styles
+    .account-benefit-container {
+      #account-benefit {
+        // min-height: 100%;
+        background-image: url("../images/background.jpeg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        color: white;
+        padding: 30px 50px;
+        margin: -3px;
+      }
+    }
+  }
+
+  // Footer component styles
   .footer {
-    border-top: 1px solid rgb(70, 65, 65);
-    margin: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 1100px;
+    background: white;
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
 
     .footer-content {
-      flex: 1;
+      max-width: 1100px;
+      // border-top: 1px solid rgb(70, 65, 65);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
       padding: 0 20px;
     }
 
@@ -72,99 +164,46 @@ ul {
   }
 }
 
-.landing {
-  height: 100%;
-
-  .welcome {
-    background-image: url(../images/landingpage.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 520px;
-    padding-top: 1px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    resize: vertical;
-
-    .content {
-      .left {
-        margin-bottom: 35px;
-        p {
-          font-size: 18px;
-        }
-
-        h2 {
-          font-size: 28px;
-        }
-      }
-
-      .search-container {
-        .link {
-          color: white;
-        }
-      }
-    }
-  }
-
-  .slogan {
-    height: 435px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    resize: vertical;
-    text-align: center;
-  }
-}
-
-.main {
-  max-width: 70%;
-  margin: 0 auto;
-  text-align: center;
-}
-
 @media only screen and(min-width: 700px) {
   body {
     font-size: 20px;
 
-    .landing {
-      .welcome {
-        height: 625px;
-      }
+    .welcome {
+      height: 625px !important;
     }
-  }
-
-  .search {
-    // width: 400px !important;
   }
 }
 
 @media only screen and(min-width: 1024px) {
   .App {
     padding-bottom: 150px;
-  }
 
-  .landing {
     .welcome {
-      // max-width: 80%;
-      // margin: 0 auto;
-      .content {
-        width: 80%;
-
-        .left {
-          float: left;
-        }
-
-        .search-container {
-          float: right;
-          width: 300px;
-          text-align: center;
-        }
+      h1 {
+        font-size: 50px;
       }
+    }
+
+    .content {
+      width: 80%;
+
+      .left {
+        float: left;
+      }
+
+      .search-container {
+        float: right;
+        width: 300px;
+        text-align: center;
+      }
+    }
+
+    #account-benefit {
+      margin: 10px;
     }
   }
 
-  .appbar-content {
+  .topbar-content {
     width: 80%;
     margin: 0 auto;
   }

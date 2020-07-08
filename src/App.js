@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/main.scss";
 
@@ -8,6 +8,7 @@ import Landing from "./components/LandingPage/Landing";
 import Results from "./components/Results";
 import Games from "./components/Games";
 import Login from "./components/Login";
+import SignUp from "./components/SignUp";
 import Footer from "./components/Footer";
 import Error404 from "./components/Error404";
 
@@ -24,6 +25,10 @@ function App() {
     setSearch(e.target.value);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Router>
       <div className="App">
@@ -38,7 +43,8 @@ function App() {
           />
           <Route path="/results" render={() => <Results Search={Search} />} />
           <Route path="/games" render={() => <Games />} />
-          <Route path="/login" render={() => <Login />} />
+          <Route path="/account/login" render={() => <Login />} />
+          <Route path="/account/join-the-dark-side" render={() => <SignUp />} />
           <Route path="/test" render={() => <Test />} />
           <Route render={() => <Error404 />} />
         </Switch>
