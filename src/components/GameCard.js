@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardActions,
@@ -43,10 +44,16 @@ export default function GameCard(props) {
 
   return (
     <Card className={`game-card ${classes.root}`}>
-      <CardActionArea className={classes.cover}>
+      <CardActionArea
+        className={classes.cover}
+        component={Link}
+        to={`/game/${props.id}`}
+      >
         <CardMedia
           className={classes.media}
-          image={require("../images/logo2.svg")}
+          image={require(`../images/covers/${props.title
+            .toLowerCase()
+            .replace(/\s/g, "")}.jpg`)}
           title="game art"
         />
       </CardActionArea>
