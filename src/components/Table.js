@@ -12,9 +12,6 @@ import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FilterListIcon from "@material-ui/icons/FilterList";
 
 const rows = (props) => {
   return props.results;
@@ -58,6 +55,12 @@ const headCells = [
     numeric: true,
     disablePadding: false,
     label: "Release Date",
+  },
+  {
+    id: "rating",
+    numeric: false,
+    disablePadding: false,
+    label: "Rating",
   },
   {
     id: "developer",
@@ -128,6 +131,7 @@ const useToolbarStyles = makeStyles((theme) => ({
         },
   title: {
     flex: "1 1 100%",
+    textAlign: "center",
   },
 }));
 
@@ -156,11 +160,6 @@ const EnhancedTableToolbar = (props) => {
           All Games
         </Typography>
       )}
-      <Tooltip title="Filter list">
-        <IconButton aria-label="filter list">
-          <FilterListIcon />
-        </IconButton>
-      </Tooltip>
     </Toolbar>
   );
 };
@@ -171,6 +170,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: "100%",
+    background: "grey",
     marginBottom: theme.spacing(2),
     marginTop: theme.spacing(5),
   },
@@ -283,7 +283,8 @@ export default function EnhancedTable(props) {
                         {row.title}
                       </TableCell>
                       <TableCell align="right">{row.release_date}</TableCell>
-                      <TableCell align="right">{row.publisher}</TableCell>
+                      <TableCell align="right">{row.rating}</TableCell>
+                      <TableCell align="right">{row.developer}</TableCell>
                     </TableRow>
                   );
                 })}

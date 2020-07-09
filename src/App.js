@@ -5,20 +5,20 @@ import "./css/main.scss";
 // Component imports
 import TopBar from "./components/TopBar";
 import Landing from "./components/LandingPage/Landing";
-import Results from "./components/Results";
+import Results2 from "./components/Results2";
 import Games from "./components/Games";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Login from "./components/User/Login";
+import SignUp from "./components/User/SignUp";
 import Footer from "./components/Footer";
 import Error404 from "./components/Error404";
 
 import Test from "./components/Test";
 
 function App() {
-  let [Search, setSearch] = useState("");
+  let [search, setSearch] = useState(null);
 
   const resetSearch = () => {
-    setSearch("");
+    setSearch(null);
   };
 
   const handleChange = (e) => {
@@ -41,8 +41,8 @@ function App() {
               <Landing resetSearch={resetSearch} handleChange={handleChange} />
             )}
           />
-          <Route path="/results" render={() => <Results Search={Search} />} />
-          <Route path="/games" render={() => <Games />} />
+          <Route path="/results" render={() => <Results2 search={search} />} />
+          <Route path="/game/all" render={() => <Results2 />} />
           <Route path="/account/login" render={() => <Login />} />
           <Route path="/account/join-the-dark-side" render={() => <SignUp />} />
           <Route path="/test" render={() => <Test />} />

@@ -46,7 +46,7 @@ ul {
 
 // Main component styles
 .App {
-  min-height: 100vh;
+  min-height: calc(100vh - 300px);
   position: relative;
   display: block;
   padding-bottom: 300px;
@@ -136,6 +136,21 @@ ul {
     }
   }
 
+  // Game results styles
+  .results-container {
+    max-width: 1100px;
+    margin: 0 5px;
+
+    .game-card {
+      background: rgba(54, 54, 54, 0.8);
+
+      * {
+        // padding: 0;
+        color: white;
+      }
+    }
+  }
+
   // Footer component styles
   .footer {
     background: white;
@@ -176,6 +191,7 @@ ul {
 
 @media only screen and(min-width: 1024px) {
   .App {
+    min-height: calc(100vh - 150px);
     padding-bottom: 150px;
 
     .welcome {
@@ -200,6 +216,10 @@ ul {
 
     #account-benefit {
       margin: 10px;
+    }
+
+    .results-container {
+      margin: 0 auto;
     }
   }
 

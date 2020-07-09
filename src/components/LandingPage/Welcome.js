@@ -47,7 +47,7 @@ export default function Welcome(props) {
               variant="contained"
               color="primary"
               component={Link}
-              to="games"
+              to="game/all"
             >
               see all games
             </Button>
