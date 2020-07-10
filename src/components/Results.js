@@ -22,6 +22,7 @@ export default function Results(props) {
   const [results, setResults] = useState([]);
   let term = props.search;
 
+  // useEffects
   useEffect(() => {
     if (term) {
       fetchResults();
@@ -33,6 +34,7 @@ export default function Results(props) {
     // eslint-disable-next-line
   }, []);
 
+  // functions
   const fetchResults = async () => {
     const data = await axios.get(`/game/search?lookup=${term}`);
     setResults(data.data);

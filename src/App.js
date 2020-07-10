@@ -6,7 +6,7 @@ import "./css/main.scss";
 import TopBar from "./components/TopBar";
 import Landing from "./components/LandingPage/Landing";
 import Results from "./components/Results";
-import GameWiki from "./components/GameWiki";
+import GameWiki from "./components/GameWiki/GameWiki";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
 import Footer from "./components/Footer";
@@ -17,6 +17,7 @@ import Test from "./components/Test";
 function App() {
   let [search, setSearch] = useState(null);
 
+  // functions
   const resetSearch = () => {
     setSearch(null);
   };
@@ -25,6 +26,7 @@ function App() {
     setSearch(e.target.value);
   };
 
+  // useEffects
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

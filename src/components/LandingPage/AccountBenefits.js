@@ -25,9 +25,9 @@ export default function AccountBenefits() {
   const classes = useStyles();
 
   return (
-    <div className="account-benefit-container">
+    <div className="account-benefit">
       <div className="container">
-        <Card className={classes.root} id="account-benefit">
+        <Card className={classes.root} id="account-benefit-content">
           <CardContent>
             {/* <Typography
           className={classes.title}

@@ -122,8 +122,8 @@ ul {
     }
 
     // Landing - AccountBenefits component styles
-    .account-benefit-container {
-      #account-benefit {
+    .account-benefit {
+      #account-benefit-content {
         // min-height: 100%;
         background-image: url("../images/background.jpeg");
         background-position: center;
@@ -149,6 +149,15 @@ ul {
         color: white;
       }
     }
+  }
+
+  // Game Wiki styles
+  .game-wiki {
+    // max-width: 1100px;
+    // margin: 0 auto;
+    min-height: 600px;
+    padding-top: 1px;
+    background: rgb(255, 118, 118);
   }
 
   // Footer component styles
@@ -222,7 +231,7 @@ ul {
       }
     }
 
-    #account-benefit {
+    #account-benefit-content {
       margin: 10px;
     }
 
