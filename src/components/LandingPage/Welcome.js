@@ -34,7 +34,6 @@ export default function Welcome(props) {
           <div className={classes.root}>
             <Search handleChange={props.handleChange} />
             <Button
-              className="button"
               variant="contained"
               color="secondary"
               component={Link}
@@ -43,7 +42,6 @@ export default function Welcome(props) {
               search
             </Button>
             <Button
-              className="button"
               variant="contained"
               color="primary"
               component={Link}

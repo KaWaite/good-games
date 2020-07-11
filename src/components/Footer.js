@@ -7,14 +7,14 @@ export default function Footer() {
       <div className="footer-content ">
         <div className="footer-1">
           <ul>
-            <Typography variant="h5">Feedback</Typography>
+            <Typography variant="h6">Feedback</Typography>
             <Typography variant="subtitle1">Contact Us</Typography>
             <Typography variant="subtitle1">Donate</Typography>
           </ul>
         </div>
         <div className="footer-2">
           <ul>
-            <Typography variant="h5">Social</Typography>
+            <Typography variant="h6">Social</Typography>
             <li>
               <Typography variant="subtitle1">Facebook</Typography>
             </li>
@@ -25,7 +25,9 @@ export default function Footer() {
         </div>
         <div className="footer-3">
           <ul>
-            <Typography variant="h6">&copy; 2020 GoodGames.com</Typography>
+            <Typography variant="subtitle1">
+              &copy; 2020 GoodGames.com
+            </Typography>
             <Typography variant="subtitle1">
               Privacy Policy &amp; Cookies
             </Typography>

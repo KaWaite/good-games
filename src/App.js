@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/main.scss";
 
@@ -15,7 +15,7 @@ import Error404 from "./components/Error404";
 import Test from "./components/Test";
 
 function App() {
-  let [search, setSearch] = useState(null);
+  const [search, setSearch] = useState(null);
 
   // functions
   const resetSearch = () => {
@@ -25,11 +25,6 @@ function App() {
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-
-  // useEffects
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   return (
     <Router>

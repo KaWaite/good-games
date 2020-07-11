@@ -2,11 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Card,
-  CardActions,
   CardContent,
   CardActionArea,
   CardMedia,
-  Button,
   Typography,
 } from "@material-ui/core";
 
@@ -23,7 +21,7 @@ const useStyles = makeStyles({
   content: {
     flex: "1 0 auto",
     paddingBottom: 0,
-    paddingTop: 0,
+    paddingTop: 15,
   },
   cover: {
     width: 151,
@@ -41,21 +39,27 @@ const useStyles = makeStyles({
 
 export default function GameCard(props) {
   const classes = useStyles();
+  const { id, title, release_date, developer, rating, image_url } = props;
 
   return (
     <Card className={`game-card ${classes.root}`}>
       <CardActionArea
         className={classes.cover}
         component={Link}
-        to={`/game/${props.id}`}
+        to={`/game/${id}`}
       >
         <CardMedia
+          className={classes.media}
+          image={image_url}
+          title="game art"
+        />
+        {/* <CardMedia
           className={classes.media}
           image={require(`../images/covers/${props.title
             .toLowerCase()
             .replace(/\s/g, "")}.jpg`)}
           title="game art"
-        />
+        /> */}
       </CardActionArea>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -64,21 +68,18 @@ export default function GameCard(props) {
             color="textSecondary"
             gutterBottom
           >
-            {props.title}
+            {developer}
           </Typography>
           <Typography variant="h5" component="h2">
-            {props.title}
+            {title}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
-            {props.developer}
+            {release_date}
           </Typography>
           <Typography variant="body2" component="p">
-            {props.rating}
+            {rating}
           </Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </div>
     </Card>
   );

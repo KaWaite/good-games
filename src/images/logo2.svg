@@ -7,7 +7,7 @@
       .logo { font-style: italic; font-family: monospace }
      </style>
 
-  <rect width="100%" height="100%" fill="black" />
+  <rect width="100%" height="100%" fill="none" />
 
   <!-- <circle cx="50%" cy="50%" r="10%" fill="green" /> -->
 
