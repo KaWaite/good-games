@@ -7,8 +7,8 @@ export default function Landing(props) {
   return (
     <div className="landing">
       <Welcome
-        resetSearch={props.resetSearch}
         handleChange={props.handleChange}
+        submitSearch={props.submitSearch}
       />
       <Slogan />
       <AccountBenefits />

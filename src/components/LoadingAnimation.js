@@ -1,8 +1,14 @@
 import React from "react";
 import ReactLoading from "react-loading";
 
-const LoadingAnimation = ({ type, color }) => (
-  <ReactLoading type={type} color={color} height={667} width={375} />
+const LoadingAnimation = ({ type, color, height, width, className }) => (
+  <ReactLoading
+    type={type}
+    color={color}
+    height={height}
+    width={width}
+    className={className}
+  />
 );
 
 export default LoadingAnimation;

@@ -16,6 +16,7 @@ import Test from "./components/Test";
 
 function App() {
   const [search, setSearch] = useState(null);
+  const [searchedTerm, setSearchedTerm] = useState(null);
 
   // functions
   const resetSearch = () => {
@@ -24,6 +25,11 @@ function App() {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
+  };
+
+  const submitSearch = () => {
+    setSearchedTerm(search);
+    return resetSearch();
   };
 
   return (
@@ -35,10 +41,22 @@ function App() {
             exact
             path="/"
             render={() => (
-              <Landing resetSearch={resetSearch} handleChange={handleChange} />
+              <Landing
+                handleChange={handleChange}
+                submitSearch={submitSearch}
+              />
             )}
           />
-          <Route path="/results" render={() => <Results search={search} />} />
+          <Route
+            path="/results"
+            render={() => (
+              <Results
+                searchedTerm={searchedTerm}
+                handleChange={handleChange}
+                submitSearch={submitSearch}
+              />
+            )}
+          />
           <Route path="/game/all" render={() => <Results />} />
           <Route path="/game/:id" render={(props) => <GameWiki {...props} />} />
           <Route path="/account/login" render={() => <Login />} />

@@ -1,32 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactLoading from "react-loading";
-import { Grid, Typography, Paper } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 
-import GameCard from "./GameCard";
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    textAlign: "center",
-    margin: "8px 0",
-  },
-  titleContainer: {
-    marginTop: 15,
-  },
-  loading: {
-    margin: "0 auto",
-  },
-}));
+import ResultsOrNot from "./ResultsOrNot";
 
 export default function Results(props) {
-  const classes = useStyles();
   const [results, setResults] = useState([]);
   const [isDone, setIsDone] = useState(false);
-  let term = props.search;
+  let term = props.searchedTerm;
 
   // useEffects
   useEffect(() => {
+    setIsDone(false);
     if (term) {
       fetchResults();
       window.scrollTo(0, 0);
@@ -34,8 +19,7 @@ export default function Results(props) {
       fetchGames();
       window.scrollTo(0, 0);
     }
-    // eslint-disable-next-line
-  }, []);
+  }, [term]);
 
   // functions
   const fetchResults = async () => {
@@ -56,36 +40,18 @@ export default function Results(props) {
         {!isDone ? (
           <ReactLoading
             type={"cylon"}
-            color="red"
-            className={classes.loading}
+            color="#f44336"
+            height="auto"
+            width="400px"
+            className="loading"
           />
         ) : (
-          <Grid container spacing={1}>
-            <Grid item xs={12} className={classes.titleContainer}>
-              <Paper className={classes.paper}>
-                <Typography
-                  variant="h6"
-                  component="h2"
-                  className={classes.title}
-                >
-                  We found {results.length} games
-                </Typography>
-              </Paper>
-            </Grid>
-            {results.map((game, i) => (
-              <Grid item xs={12} sm={6} key={i}>
-                <GameCard
-                  className="game-card"
-                  id={game._id}
-                  title={game.title}
-                  release_date={game.release_date}
-                  developer={game.developer}
-                  rating={game.rating}
-                  image_url={game.image_url}
-                />
-              </Grid>
-            ))}
-          </Grid>
+          <ResultsOrNot
+            term={term}
+            results={results}
+            handleChange={props.handleChange}
+            submitSearch={props.submitSearch}
+          />
         )}
       </div>
     </div>
