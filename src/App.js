@@ -12,7 +12,7 @@ import SignUp from "./components/User/SignUp";
 import Footer from "./components/Footer";
 import Error404 from "./components/Error404";
 
-import Test from "./components/Test";
+import Test from "./components/TestingArea/Test";
 
 function App() {
   const [search, setSearch] = useState(null);

@@ -19,6 +19,7 @@ export default function Results(props) {
       fetchGames();
       window.scrollTo(0, 0);
     }
+    // eslint-disable-next-line
   }, [term]);
 
   // functions

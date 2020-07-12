@@ -6,10 +6,10 @@ import {
   AppBar,
   Toolbar,
   Button,
-  IconButton,
-  InputBase,
+  // IconButton,
+  // InputBase,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
+// import SearchIcon from "@material-ui/icons/Search";
 
 import logo from "../images/logo2.svg";
 
