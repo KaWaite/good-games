@@ -28,7 +28,6 @@ export default function Results(props) {
       const data = await axios.get(
         `https://vast-peak-54513.herokuapp.com/game/search?lookup=${term}`
       );
-      console.log(data);
       setResults(data.data);
       setIsDone(true);
     } catch (err) {
