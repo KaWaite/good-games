@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Button, Typography } from "@material-ui/core";
 
@@ -12,17 +12,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleSubmit = () => {
+
+  }
+
   return (
     <div className="form-container">
       <Paper className="form">
         <Typography variant="h1">Signup</Typography>
-        <form className={classes.root} noValidate autoComplete="off" action="#">
+        <form className={classes.root} noValidate autoComplete="off" action="https://vast-peak-54513.herokuapp.com/auth">
           <TextField
             id="username"
             label="Username"
@@ -36,7 +43,7 @@ export default function SignUp() {
             variant="outlined"
             size="small"
           />
-          <Button variant="contained" color="primary" size="small">
+          <Button variant="contained" color="primary" size="small" type="submit">
             Register
           </Button>
         </form>
