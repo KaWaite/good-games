@@ -6,9 +6,9 @@ Plan: One stop site for video games. Sign in. Search. Review. Check length. Trop
 
 Using self made MongoDB database and currently only a handful of games. More to come as I add to the database. (Will revamp it!)
 
-## Check it out on heroku
+## Check it out here:
 
-https://flippin-good-games.herokuapp.com/
+https://good-games.netlify.app/
 
 ## Run in development
 
