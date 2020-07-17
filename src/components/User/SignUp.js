@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Joi from "joi";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, TextField, Button, Typography, Snackbar } from "@material-ui/core";
-import MuiAlert from '@material-ui/lab/Alert';
+import { Paper, TextField, Button, Typography, Fade } from "@material-ui/core";
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,9 +11,8 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
-
   error: {
-    margin: "10px",
+    margin: "5px",
   },
 }));
 
@@ -29,16 +29,15 @@ export default function SignUp() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [errorMessage]);
 
-  // Alert component
-  function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
-
- const handleClose = (event) => {
-    setOpen(false);
-  };
+  // Joi user validation schema
+  const schema = Joi.object().keys({
+    username: Joi.string().regex(/(^[a-zA-Z0-9_]+$)/).min(2).max(25).required(),
+    email: Joi.string().regex(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/).required(),
+    password: Joi.string().trim().min(8).required(),
+    confirmPassword: Joi.string().trim().min(8).required(),
+  });
 
   // functions
   const handleChange = (prop) => (event) => {
@@ -48,7 +47,6 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signup();
-    console.log(formInfo);
   };
 
   const signup = () => {
@@ -64,16 +62,26 @@ export default function SignUp() {
       setOpen(true);
       return false;
     } 
+
+    const result = schema.validate(formInfo);
+    if (!result.error) {
+      console.log("YAY NO ERRORS");
+      return true;
+    } else {
+      setErrorMessage(result.error.details[0].message);
+      setOpen(true);
+      return false;
+    }
   };
 
 
   return (
-    <>
-    <Snackbar anchorOrigin={{ vertical: "top", horizontal: "center" }} open={open} autoHideDuration={3000} key="top-center" onClose={handleClose}>
-      <Alert severity="error" className={classes.error}>{errorMessage}</Alert>
-    </Snackbar>
     <div className="form-container">
-      
+      <Fade in={open}>
+        <Alert severity="error" elevation={6} variant="filled" className={classes.error}>
+          {errorMessage}
+        </Alert>
+      </Fade>
       <Paper className="form">
         <Typography variant="h1">Signup</Typography>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -113,6 +121,5 @@ export default function SignUp() {
         </form>
       </Paper>
     </div>
-    </>
   );
 }

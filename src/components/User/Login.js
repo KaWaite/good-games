@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, TextField, Button, Typography } from "@material-ui/core";
+import { Paper, TextField, Button, Typography, Fade } from "@material-ui/core";
+import { Alert } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -9,9 +10,18 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
     },
   },
+  error: {
+    margin: "5px",
+  }
 }));
 
 export default function Login() {
+  const [formInfo, setFormInfo] = useState({
+    username: '',
+    password: ''
+  });
+  const [errorMessage, setErrorMessage] = useState();
+  const [open, setOpen] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -20,6 +30,11 @@ export default function Login() {
 
   return (
     <div className="form-container">
+    <Fade in={open}>
+        <Alert severity="error" elevation={6} variant="filled" className={classes.error}>
+          {errorMessage}
+        </Alert>
+      </Fade>
       <Paper className="form">
         <Typography variant="h1">Login</Typography>
         <form className={classes.root} noValidate autoComplete="off" action="#">
