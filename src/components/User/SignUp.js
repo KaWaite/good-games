@@ -84,7 +84,7 @@ export default function SignUp() {
       </Fade>
       <Paper className="form">
         <Typography variant="h1">Signup</Typography>
-        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
           <TextField
             id="username"
             label="Username"
@@ -115,7 +115,7 @@ export default function SignUp() {
             type="password"
             onChange={handleChange('confirmPassword')}
           />
-          <Button variant="contained" color="primary" size="small" type="submit">
+          <Button variant="contained" color="secondary" size="medium" type="submit">
             Register
           </Button>
         </form>
