@@ -12,8 +12,6 @@ import SignUp from "./components/User/SignUp";
 import Footer from "./components/Footer";
 import Error404 from "./components/Error404";
 
-import Test from "./components/TestingArea/Test";
-
 function App() {
   const [search, setSearch] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState(null);
@@ -61,7 +59,6 @@ function App() {
           <Route path="/game/:id" render={(props) => <GameWiki {...props} />} />
           <Route path="/account/login" render={() => <Login />} />
           <Route path="/account/join-the-dark-side" render={() => <SignUp />} />
-          <Route path="/test" render={() => <Test />} />
           <Route render={() => <Error404 />} />
         </Switch>
         <Footer />
