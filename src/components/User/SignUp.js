@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
+import ReactLoading from "react-loading";
 import axios from "axios";
 import Joi from "joi";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,13 +26,16 @@ export default function SignUp() {
     password: "",
     confirmPassword: "",
   });
-  const [errorMessage, setErrorMessage] = useState();
+  const [alertMessage, setAlertMessage] = useState("");
   const [open, setOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [signingUp, setSigningUp] = useState(false);
+
   const classes = useStyles();
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [errorMessage]);
+  }, [alertMessage]);
 
   // Joi user validation schema
   const schema = Joi.object().keys({
@@ -56,42 +61,56 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSigningUp(true);
     signup();
   };
 
-  const signup = () => {
+  const signup = async () => {
     if (validUser()) {
       const newUser = {
         username: formInfo.username,
         email: formInfo.email,
         password: formInfo.password,
       };
-      axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, newUser);
-      console.log("false....");
+      try {
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/auth/signup`,
+          newUser
+        );
+        setTimeout(() => {
+          setSuccess(true);
+        }, 1000);
+      } catch (err) {
+        setSigningUp(false);
+        setAlertMessage(err.response.data.message);
+        setOpen(true);
+      }
     }
   };
 
   const validUser = () => {
     if (formInfo.password !== formInfo.confirmPassword) {
-      setErrorMessage('"passwords" do not match');
+      setSigningUp(false);
+      setAlertMessage('"passwords" do not match');
       setOpen(true);
       return false;
     }
 
     const result = schema.validate(formInfo);
     if (!result.error) {
-      console.log("YAY NO ERRORS");
       return true;
     } else {
+      setSigningUp(false);
+      // Joi error sends too much info on email regex, so make custom error
       if (
         result.error.details[0].path[0] === "email" &&
         result.error.details[0].type === "string.pattern.base"
       ) {
-        setErrorMessage('"email" is not a valid email.');
+        setAlertMessage('"email" is not a valid email.');
         setOpen(true);
         return false;
       } else {
-        setErrorMessage(result.error.details[0].message);
+        setAlertMessage(result.error.details[0].message);
         setOpen(true);
         return false;
       }
@@ -100,63 +119,82 @@ export default function SignUp() {
 
   return (
     <div className="form-container">
-      <Fade in={open}>
-        <Alert
-          severity="warning"
-          elevation={6}
-          variant="filled"
-          className={classes.error}
-        >
-          {errorMessage}
-        </Alert>
-      </Fade>
-      <Paper className="form">
-        <Typography variant="h1">Signup</Typography>
-        <form
-          className={classes.root}
-          autoComplete="off"
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            id="username"
-            label="Username"
-            variant="outlined"
-            size="small"
-            onChange={handleChange("username")}
-          />
-          <TextField
-            id="email"
-            label="Email"
-            variant="outlined"
-            size="small"
-            onChange={handleChange("email")}
-          />
-          <TextField
-            id="password"
-            label="Password"
-            variant="outlined"
-            size="small"
-            type="password"
-            onChange={handleChange("password")}
-          />
-          <TextField
-            id="confirmPassword"
-            label="Confirm Password"
-            variant="outlined"
-            size="small"
-            type="password"
-            onChange={handleChange("confirmPassword")}
-          />
-          <Button
-            variant="contained"
-            color="secondary"
-            size="medium"
-            type="submit"
-          >
-            Register
-          </Button>
-        </form>
-      </Paper>
+      {/* If signup is successful, redirect to login page */}
+      {success ? <Redirect to="/account/login" /> : ""}
+      {/* While signing up, show loading image */}
+      {signingUp ? (
+        <ReactLoading
+          type={"cylon"}
+          color="#f44336"
+          height="auto"
+          width="400px"
+          className="loading"
+        />
+      ) : (
+        <>
+          <Fade in={open}>
+            <Alert
+              severity="warning"
+              elevation={6}
+              variant="filled"
+              className={classes.error}
+            >
+              {alertMessage}
+            </Alert>
+          </Fade>
+          <Paper className="form">
+            <Typography variant="h1">Signup</Typography>
+            <form
+              className={classes.root}
+              autoComplete="off"
+              onSubmit={handleSubmit}
+            >
+              <TextField
+                id="username"
+                label="Username"
+                variant="outlined"
+                size="small"
+                value={formInfo.username}
+                onChange={handleChange("username")}
+              />
+              <TextField
+                id="email"
+                label="Email"
+                variant="outlined"
+                size="small"
+                value={formInfo.email}
+                onChange={handleChange("email")}
+              />
+              <TextField
+                id="password"
+                label="Password"
+                variant="outlined"
+                size="small"
+                type="password"
+                value={formInfo.password}
+                onChange={handleChange("password")}
+              />
+              <TextField
+                id="confirmPassword"
+                label="Confirm Password"
+                variant="outlined"
+                size="small"
+                type="password"
+                value={formInfo.confirmPassword}
+                onChange={handleChange("confirmPassword")}
+              />
+              <Button
+                variant="contained"
+                color="secondary"
+                size="medium"
+                type="submit"
+              >
+                Register
+              </Button>
+            </form>
+          </Paper>
+        </>
+      )}
     </div>
   );
 }

@@ -4,6 +4,10 @@
   height: 45px;
 }
 
+.loading {
+  margin: 0 auto;
+}
+
 body {
   margin: 0;
   font-family: "Kanit", sans-serif;
@@ -162,10 +166,6 @@ ul {
       }
     }
 
-    .loading {
-      margin: 0 auto;
-    }
-
     .game-card {
       background: rgba(54, 54, 54, 0.8);
 
@@ -318,7 +318,7 @@ ul {
   .App {
     .welcome {
       height: calc(100vh - 45px) !important;
-      
+
       .content {
         max-width: 1200px;
       }
