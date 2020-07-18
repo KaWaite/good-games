@@ -25,9 +25,11 @@ export default function Results(props) {
   // functions
   const fetchResults = async () => {
     try {
-      const data = (await axios.get(
-              `https://vast-peak-54513.herokuapp.com/game/search?lookup=${term}`
-            )).data;
+      const data = (
+        await axios.get(
+          `${process.env.REACT_APP_API_URL}/game/search?lookup=${term}`
+        )
+      ).data;
       setResults(data);
     } catch (err) {
       console.log(err);
@@ -37,9 +39,9 @@ export default function Results(props) {
 
   const fetchGames = async () => {
     try {
-      const data = (await axios.get(
-        "https://vast-peak-54513.herokuapp.com/game/all"
-        )).data;
+      const data = (
+        await axios.get(`${process.env.REACT_APP_API_URL}/game/all`)
+      ).data;
       setResults(data);
     } catch (err) {
       console.log(err);

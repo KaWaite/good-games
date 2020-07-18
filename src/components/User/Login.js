@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Joi from "joi";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Button, Typography, Fade } from "@material-ui/core";
-import { Alert } from '@material-ui/lab';
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,13 +13,13 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     margin: "5px",
-  }
+  },
 }));
 
 export default function Login() {
   const [formInfo, setFormInfo] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
   const [errorMessage, setErrorMessage] = useState();
   const [open, setOpen] = useState(false);
@@ -31,7 +31,11 @@ export default function Login() {
 
   // Joi user validation schema
   const schema = Joi.object().keys({
-    username: Joi.string().regex(/(^[a-zA-Z0-9_]+$)/).min(2).max(25).required(),
+    username: Joi.string()
+      .regex(/(^[a-zA-Z0-9_]+$)/)
+      .min(2)
+      .max(25)
+      .required(),
     password: Joi.string().trim().min(8).required(),
   });
 
@@ -46,7 +50,7 @@ export default function Login() {
   };
 
   const login = () => {
-    if(validUser()){
+    if (validUser()) {
       // send data to server...
       console.log("false....");
     }
@@ -66,14 +70,23 @@ export default function Login() {
 
   return (
     <div className="form-container">
-    <Fade in={open}>
-        <Alert severity="error" elevation={6} variant="filled" className={classes.error}>
+      <Fade in={open}>
+        <Alert
+          severity="error"
+          elevation={6}
+          variant="filled"
+          className={classes.error}
+        >
           {errorMessage}
         </Alert>
       </Fade>
       <Paper className="form">
         <Typography variant="h1">Login</Typography>
-        <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
+        <form
+          className={classes.root}
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
           <TextField
             id="username"
             label="Username"
@@ -89,7 +102,12 @@ export default function Login() {
             type="password"
             onChange={handleChange("password")}
           />
-          <Button variant="contained" color="secondary" size="medium" type="submit">
+          <Button
+            variant="contained"
+            color="secondary"
+            size="medium"
+            type="submit"
+          >
             Login
           </Button>
         </form>

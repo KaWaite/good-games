@@ -11,7 +11,7 @@ export default function GameWiki(props) {
   useEffect(() => {
     const fetchGame = async () => {
       const data = await axios.get(
-        `https://vast-peak-54513.herokuapp.com/game/${params.id}`
+        `${process.env.REACT_APP_API_URL}/game/${params.id}`
       );
       setGameInfo(data.data);
     };

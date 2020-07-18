@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Joi from "joi";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, TextField, Button, Typography, Fade } from "@material-ui/core";
-import { Alert } from '@material-ui/lab';
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const [formInfo, setFormInfo] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [errorMessage, setErrorMessage] = useState();
   const [open, setOpen] = useState(false);
@@ -33,8 +34,14 @@ export default function SignUp() {
 
   // Joi user validation schema
   const schema = Joi.object().keys({
-    username: Joi.string().regex(/(^[a-zA-Z0-9_]+$)/).min(2).max(25).required(),
-    email: Joi.string().regex(/^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/).required(),
+    username: Joi.string()
+      .regex(/(^[a-zA-Z0-9_]+$)/)
+      .min(2)
+      .max(25)
+      .required(),
+    email: Joi.string()
+      .regex(/^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/)
+      .required(),
     password: Joi.string().trim().min(8).required(),
     confirmPassword: Joi.string().trim().min(8).required(),
   });
@@ -42,6 +49,9 @@ export default function SignUp() {
   // functions
   const handleChange = (prop) => (event) => {
     setFormInfo({ ...formInfo, [prop]: event.target.value });
+    if (open) {
+      setOpen(false);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -50,47 +60,63 @@ export default function SignUp() {
   };
 
   const signup = () => {
-    if(validUser()){
-      // send data to server...
+    if (validUser()) {
+      const newUser = {
+        username: formInfo.username,
+        email: formInfo.email,
+        password: formInfo.password,
+      };
+      axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, newUser);
       console.log("false....");
     }
   };
 
   const validUser = () => {
-    if(formInfo.password !== formInfo.confirmPassword) {
+    if (formInfo.password !== formInfo.confirmPassword) {
       setErrorMessage('"passwords" do not match');
       setOpen(true);
       return false;
-    } 
+    }
 
     const result = schema.validate(formInfo);
     if (!result.error) {
       console.log("YAY NO ERRORS");
       return true;
     } else {
-      if(result.error.details[0].path[0] === "email" && result.error.details[0].type === "string.pattern.base") {
+      if (
+        result.error.details[0].path[0] === "email" &&
+        result.error.details[0].type === "string.pattern.base"
+      ) {
         setErrorMessage('"email" is not a valid email.');
         setOpen(true);
         return false;
       } else {
         setErrorMessage(result.error.details[0].message);
         setOpen(true);
-        return false;  
+        return false;
       }
     }
   };
 
-
   return (
     <div className="form-container">
       <Fade in={open}>
-        <Alert severity="error" elevation={6} variant="filled" className={classes.error}>
+        <Alert
+          severity="warning"
+          elevation={6}
+          variant="filled"
+          className={classes.error}
+        >
           {errorMessage}
         </Alert>
       </Fade>
       <Paper className="form">
         <Typography variant="h1">Signup</Typography>
-        <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
+        <form
+          className={classes.root}
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
           <TextField
             id="username"
             label="Username"
@@ -98,11 +124,11 @@ export default function SignUp() {
             size="small"
             onChange={handleChange("username")}
           />
-          <TextField 
-            id="email" 
-            label="Email" 
-            variant="outlined" 
-            size="small" 
+          <TextField
+            id="email"
+            label="Email"
+            variant="outlined"
+            size="small"
             onChange={handleChange("email")}
           />
           <TextField
@@ -111,7 +137,7 @@ export default function SignUp() {
             variant="outlined"
             size="small"
             type="password"
-            onChange={handleChange('password')}
+            onChange={handleChange("password")}
           />
           <TextField
             id="confirmPassword"
@@ -119,9 +145,14 @@ export default function SignUp() {
             variant="outlined"
             size="small"
             type="password"
-            onChange={handleChange('confirmPassword')}
+            onChange={handleChange("confirmPassword")}
           />
-          <Button variant="contained" color="secondary" size="medium" type="submit">
+          <Button
+            variant="contained"
+            color="secondary"
+            size="medium"
+            type="submit"
+          >
             Register
           </Button>
         </form>
