@@ -25,21 +25,26 @@ export default function Results(props) {
   // functions
   const fetchResults = async () => {
     try {
-      const data = await axios.get(
-        `https://vast-peak-54513.herokuapp.com/game/search?lookup=${term}`
-      );
-      setResults(data.data);
-      setIsDone(true);
+      const data = (await axios.get(
+              `https://vast-peak-54513.herokuapp.com/game/search?lookup=${term}`
+            )).data;
+      setResults(data);
     } catch (err) {
       console.log(err);
     }
+    setIsDone(true);
   };
 
   const fetchGames = async () => {
-    const data = await axios.get(
-      "https://vast-peak-54513.herokuapp.com/game/all"
-    );
-    setResults(data.data);
+    try {
+      const data = (await axios.get(
+        "https://vast-peak-54513.herokuapp.com/game/all"
+        )).data;
+      setResults(data);
+    } catch (err) {
+      console.log(err);
+      term = "Something went wrong";
+    }
     setIsDone(true);
   };
 

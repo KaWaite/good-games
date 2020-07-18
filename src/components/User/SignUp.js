@@ -58,7 +58,7 @@ export default function SignUp() {
 
   const validUser = () => {
     if(formInfo.password !== formInfo.confirmPassword) {
-      setErrorMessage("Passwords do not match");
+      setErrorMessage('"passwords" do not match');
       setOpen(true);
       return false;
     } 
@@ -68,9 +68,15 @@ export default function SignUp() {
       console.log("YAY NO ERRORS");
       return true;
     } else {
-      setErrorMessage(result.error.details[0].message);
-      setOpen(true);
-      return false;
+      if(result.error.details[0].path[0] === "email" && result.error.details[0].type === "string.pattern.base") {
+        setErrorMessage('"email" is not a valid email.');
+        setOpen(true);
+        return false;
+      } else {
+        setErrorMessage(result.error.details[0].message);
+        setOpen(true);
+        return false;  
+      }
     }
   };
 
