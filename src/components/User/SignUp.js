@@ -34,7 +34,7 @@ export default function SignUp() {
   // Joi user validation schema
   const schema = Joi.object().keys({
     username: Joi.string().regex(/(^[a-zA-Z0-9_]+$)/).min(2).max(25).required(),
-    email: Joi.string().regex(/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/).required(),
+    email: Joi.string().regex(/^([\w-.]+@([\w-]+\.)+[\w-]{2,4})?$/).required(),
     password: Joi.string().trim().min(8).required(),
     confirmPassword: Joi.string().trim().min(8).required(),
   });
