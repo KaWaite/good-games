@@ -9,6 +9,8 @@ import Results from "./components/Results";
 import GameWiki from "./components/GameWiki/GameWiki";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
+import UserProfile from "./components/User/UserProfile";
+import Dashboard from "./components/Dashboard/Dashboard";
 import Footer from "./components/Footer";
 import Error404 from "./components/Errors/Error404";
 import Error500 from "./components/Errors/Error500";
@@ -60,6 +62,8 @@ function App() {
           <Route path="/game/:id" render={(props) => <GameWiki {...props} />} />
           <Route path="/account/login" render={() => <Login />} />
           <Route path="/account/join-the-dark-side" render={() => <SignUp />} />
+          <Route path="/account/dashboard" render={() => <Dashboard />} />
+          <Route path="/account/profile" render={() => <UserProfile />} />
           <Route path="/oops" render={() => <Error500 />} />
           <Route render={() => <Error404 />} />
         </Switch>

@@ -101,19 +101,24 @@ export default function SignUp() {
       return true;
     } else {
       setSigningUp(false);
-      // Joi error sends too much info on email regex, so make custom error
+      // Joi error sends too much info on email regex, so use this custom error
       if (
         result.error.details[0].path[0] === "email" &&
         result.error.details[0].type === "string.pattern.base"
       ) {
         setAlertMessage('"email" is not a valid email.');
-        setOpen(true);
-        return false;
+      } else if (
+        result.error.details[0].path[0] === "username" &&
+        result.error.details[0].type === "string.pattern.base"
+      ) {
+        setAlertMessage(
+          '"username" is not a valid username. Make sure there are no spaces and try again.'
+        );
       } else {
         setAlertMessage(result.error.details[0].message);
-        setOpen(true);
-        return false;
       }
+      setOpen(true);
+      return false;
     }
   };
 
