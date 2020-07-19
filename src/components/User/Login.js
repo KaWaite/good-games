@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const [formInfo, setFormInfo] = useState({
     username: "",
     password: "",
@@ -69,7 +69,8 @@ export default function Login() {
             formInfo
           )
         ).data;
-        localStorage.token = result.token;
+        localStorage.token = JSON.stringify(result.token);
+        props.handleAuthorization();
         setTimeout(() => {
           setSuccess(true);
         }, 1000);
@@ -101,7 +102,7 @@ export default function Login() {
   return (
     <div className="form-container">
       {/* If signup is successful, redirect to login page */}
-      {success ? <Redirect to="/account/dashboard" /> : ""}
+      {success && <Redirect to="/dashboard" />}
       {/* While logging in, show loading image */}
       {loggingIn ? (
         <ReactLoading

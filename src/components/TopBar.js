@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
 export default function TopBar(props) {
   const classes = useStyles();
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    props.handleAuthorization();
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static" className="topbar">
@@ -65,19 +70,20 @@ export default function TopBar(props) {
             GoodGames
           </Typography> */}
           <div className={classes.grow} />
-          {/* <IconButton aria-label="search" color="inherit">
-            <SearchIcon />
-          </IconButton> */}
-          <Button
-            color="primary"
-            component={Link}
-            to="/account/join-the-dark-side"
-          >
-            Join
-          </Button>
-          <Button color="primary" component={Link} to="/account/login">
-            Login
-          </Button>
+          {props.isLoggedIn ? (
+            <Button color="primary" onClick={logout}>
+              Logout
+            </Button>
+          ) : (
+            <>
+              <Button color="primary" component={Link} to="/join-the-dark-side">
+                Join
+              </Button>
+              <Button color="primary" component={Link} to="/login">
+                Login
+              </Button>
+            </>
+          )}
         </Toolbar>
       </AppBar>
     </div>

@@ -1,5 +1,10 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  Redirect,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import "./css/main.scss";
 
 // Component imports
@@ -15,11 +20,23 @@ import Footer from "./components/Footer";
 import Error404 from "./components/Errors/Error404";
 import Error500 from "./components/Errors/Error500";
 
+// Guarded route
+import { PrivateRoute } from "./router/_private";
+
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState(null);
 
   // functions
+  const handleAuthorization = () => {
+    if (localStorage.token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  };
+
   const resetSearch = () => {
     setSearch(null);
   };
@@ -33,10 +50,21 @@ function App() {
     return resetSearch();
   };
 
+  // const loggedInRedirectDashboard = () => {
+
+  // }
+
+  useEffect(() => {
+    handleAuthorization();
+  }, []);
+
   return (
     <Router>
       <div className="App">
-        <TopBar />
+        <TopBar
+          isLoggedIn={isLoggedIn}
+          handleAuthorization={handleAuthorization}
+        />
         <Switch>
           <Route
             exact
@@ -60,10 +88,32 @@ function App() {
           />
           <Route path="/game/all" render={() => <Results />} />
           <Route path="/game/:id" render={(props) => <GameWiki {...props} />} />
-          <Route path="/account/login" render={() => <Login />} />
-          <Route path="/account/join-the-dark-side" render={() => <SignUp />} />
-          <Route path="/account/dashboard" render={() => <Dashboard />} />
-          <Route path="/account/profile" render={() => <UserProfile />} />
+          <Route
+            path="/login"
+            render={() => {
+              if (isLoggedIn) {
+                return <Redirect to="/dashboard" />;
+              } else {
+                return <Login handleAuthorization={handleAuthorization} />;
+              }
+            }}
+          />
+          <Route
+            path="/join-the-dark-side"
+            render={() => {
+              if (isLoggedIn) {
+                return <Redirect to="/dashboard" />;
+              } else {
+                return <SignUp />;
+              }
+            }}
+          />
+
+          {/* User only Routes */}
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/profile" component={UserProfile} />
+
+          {/* Error Routes */}
           <Route path="/oops" render={() => <Error500 />} />
           <Route render={() => <Error404 />} />
         </Switch>

@@ -125,7 +125,7 @@ export default function SignUp() {
   return (
     <div className="form-container">
       {/* If signup is successful, redirect to login page */}
-      {success ? <Redirect to="/account/login" /> : ""}
+      {success && <Redirect to="/login" />}
       {/* While signing up, show loading image */}
       {signingUp ? (
         <ReactLoading

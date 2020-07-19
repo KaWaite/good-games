@@ -58,7 +58,7 @@ export default function AccountBenefits() {
               variant="contained"
               color="secondary"
               component={Link}
-              to="/account/join-the-dark-side"
+              to="/join-the-dark-side"
             >
               Create Account
             </Button>
