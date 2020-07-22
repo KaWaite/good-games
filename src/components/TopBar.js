@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     padding: 0,
   },
-  title: {
-    flexGrow: 1,
-    // textDecoration: "none",
+  dashboardButton: {
+    marginLeft: theme.spacing(3),
+    // background: "brown",
   },
   grow: {
     flexGrow: 1,
@@ -69,13 +69,23 @@ export default function TopBar(props) {
           >
             GoodGames
           </Typography> */}
-          <div className={classes.grow} />
           {props.isLoggedIn ? (
-            <Button color="primary" onClick={logout}>
-              Logout
-            </Button>
+            <>
+              <Button
+                className={classes.dashboardButton}
+                component={Link}
+                to="/dashboard"
+              >
+                Dashboard
+              </Button>
+              <div className={classes.grow} />
+              <Button onClick={logout} component={Link} to="/">
+                Logout
+              </Button>
+            </>
           ) : (
             <>
+              <div className={classes.grow} />
               <Button color="primary" component={Link} to="/join-the-dark-side">
                 Join
               </Button>

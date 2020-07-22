@@ -104,7 +104,7 @@ function App() {
               if (isLoggedIn) {
                 return <Redirect to="/dashboard" />;
               } else {
-                return <SignUp />;
+                return <SignUp handleAuthorization={handleAuthorization} />;
               }
             }}
           />

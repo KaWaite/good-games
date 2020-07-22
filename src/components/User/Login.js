@@ -69,7 +69,7 @@ export default function Login(props) {
             formInfo
           )
         ).data;
-        localStorage.token = JSON.stringify(result.token);
+        localStorage.token = result.token;
         props.handleAuthorization();
         setTimeout(() => {
           setSuccess(true);

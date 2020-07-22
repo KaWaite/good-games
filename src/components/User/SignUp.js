@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [formInfo, setFormInfo] = useState({
     username: "",
     email: "",
@@ -73,11 +73,13 @@ export default function SignUp() {
         password: formInfo.password,
       };
       try {
-        await axios.post(
+        const result = await axios.post(
           `${process.env.REACT_APP_API_URL}/auth/signup`,
           newUser
         );
+        localStorage.token = result.token;
         setTimeout(() => {
+          props.handleAuthorization();
           setSuccess(true);
         }, 1000);
       } catch (err) {
@@ -125,7 +127,7 @@ export default function SignUp() {
   return (
     <div className="form-container">
       {/* If signup is successful, redirect to login page */}
-      {success && <Redirect to="/login" />}
+      {success && <Redirect to="/dashboard" />}
       {/* While signing up, show loading image */}
       {signingUp ? (
         <ReactLoading
