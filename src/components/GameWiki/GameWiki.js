@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import GameWikiTop from "./GameWikiTop";
 import axios from "axios";
 
+import "./styles.scss";
+
 export default function GameWiki(props) {
   const [gameInfo, setGameInfo] = useState([]);
   const {

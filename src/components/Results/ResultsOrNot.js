@@ -3,7 +3,7 @@ import { Grid, Typography, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import GameCard from "./GameCard";
-import Search from "./Search/Search";
+import Search from "../Search/Search";
 
 const useStyles = makeStyles((theme) => ({
   title: {

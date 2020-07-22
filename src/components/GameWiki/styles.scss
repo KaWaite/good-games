@@ -1,0 +1,47 @@
+// Game Wiki styles
+.game-wiki {
+  min-height: 600px;
+  width: 100vw;
+  padding-bottom: 300px;
+  margin: 0 auto;
+  padding-top: 1px;
+
+  .game-wiki-top {
+    background: rgba(54, 54, 54, 0.8);
+    max-width: 1100px;
+
+    * {
+      color: white;
+    }
+  }
+  .game-wiki-title {
+    :first-child {
+      font-size: 35px;
+    }
+  }
+
+  .game-wiki-image {
+    height: 0;
+    padding-top: 56.25%;
+  }
+}
+
+@media only screen and(min-width: 700px) {
+  .game-wiki {
+    .game-wiki-top {
+      padding: 10px 20px;
+    }
+    .game-wiki-image {
+      width: 500px;
+      height: 300px;
+      padding: 0;
+    }
+    border-radius: 5px;
+  }
+}
+
+@media only screen and(min-width: 1024px) {
+  .game-wiki-top {
+    margin: 10px auto 0;
+  }
+}

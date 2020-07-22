@@ -4,6 +4,8 @@ import ReactLoading from "react-loading";
 
 import ResultsOrNot from "./ResultsOrNot";
 
+import "./styles.scss";
+
 export default function Results(props) {
   const [results, setResults] = useState([]);
   const [isDone, setIsDone] = useState(false);

@@ -10,7 +10,7 @@ import "./css/main.scss";
 // Component imports
 import TopBar from "./components/TopBar";
 import Landing from "./components/LandingPage/Landing";
-import Results from "./components/Results";
+import Results from "./components/Results/Results";
 import GameWiki from "./components/GameWiki/GameWiki";
 import Login from "./components/User/Login";
 import SignUp from "./components/User/SignUp";
