@@ -110,7 +110,22 @@ function App() {
           />
 
           {/* User only Routes */}
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <Route
+            path="/dashboard"
+            render={() => {
+              if (isLoggedIn) {
+                return (
+                  <Dashboard
+                    handleAuthorization={handleAuthorization}
+                    handleChange={handleChange}
+                    submitSearch={submitSearch}
+                  />
+                );
+              } else {
+                return <Redirect to="/login" />;
+              }
+            }}
+          />
           <PrivateRoute path="/profile" component={UserProfile} />
 
           {/* Error Routes */}
