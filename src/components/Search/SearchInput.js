@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedInputBase(props) {
+export default function SearchInput(props) {
   const classes = useStyles();
 
   return (
