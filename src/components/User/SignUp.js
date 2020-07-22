@@ -73,13 +73,15 @@ export default function SignUp(props) {
         password: formInfo.password,
       };
       try {
-        const result = await axios.post(
-          `${process.env.REACT_APP_API_URL}/auth/signup`,
-          newUser
-        );
+        const result = (
+          await axios.post(
+            `${process.env.REACT_APP_API_URL}/auth/signup`,
+            newUser
+          )
+        ).data;
         localStorage.token = result.token;
+        props.handleAuthorization();
         setTimeout(() => {
-          props.handleAuthorization();
           setSuccess(true);
         }, 1000);
       } catch (err) {

@@ -60,15 +60,6 @@ export default function TopBar(props) {
           >
             <img src={logo} alt="good games logo" className="logo" />
           </Button>
-          {/* <Typography
-            variant="h6"
-            color="primary"
-            className={classes.title}
-            component={Link}
-            to="/"
-          >
-            GoodGames
-          </Typography> */}
           {props.isLoggedIn ? (
             <>
               <Button

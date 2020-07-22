@@ -22,6 +22,7 @@ export default function SearchInput(props) {
         placeholder="Search game..."
         inputProps={{ "aria-label": "search game" }}
         onChange={props.handleChange}
+        onFocus={props.showButtons}
       />
     </Paper>
   );

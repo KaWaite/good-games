@@ -19,6 +19,8 @@ export default function Welcome(props) {
           desc="Search the Good Games database to get started."
           handleChange={props.handleChange}
           submitSearch={props.submitSearch}
+          show={true}
+          disableHide={true}
         />
       </div>
     </div>
