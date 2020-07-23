@@ -39,10 +39,18 @@ const useStyles = makeStyles({
 
 export default function GameCard(props) {
   const classes = useStyles();
-  const { id, title, release_date, developer, rating, image_url } = props;
+  const {
+    id,
+    title,
+    release_date,
+    developer,
+    rating,
+    image_url,
+    ...rest
+  } = props;
 
   return (
-    <Card className={`game-card ${classes.root}`}>
+    <Card {...rest} className={`game-card ${classes.root}`}>
       <CardActionArea
         className={classes.cover}
         component={Link}

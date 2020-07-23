@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
-import { Typography, Grid, Fab, Divider } from "@material-ui/core";
+import { Typography, Grid, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AddIcon from "@material-ui/icons/Add";
 
-import CurrentList from "../Dashboard/CurrentList";
+import CurrentList from "./CurrentList";
 import Search from "../Search/Search";
 
 import "./styles.scss";
@@ -23,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard(props) {
   const [user, setUser] = useState({});
+
   const classes = useStyles();
 
   // functions
@@ -47,7 +47,8 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     fetchTokenInfo();
-  });
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className={`dashboard ${classes.root}`}>
@@ -57,22 +58,7 @@ export default function Dashboard(props) {
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={9} md={6}>
-            <section className="current-list">
-              <Typography variant="h5">Currently playing - 4</Typography>
-              <CurrentList defaultExpanded="defaultExpanded" />
-              <CurrentList />
-              <CurrentList />
-              <CurrentList />
-              <Fab
-                size="small"
-                color="secondary"
-                variant="extended"
-                aria-label="add"
-                className="plus-button"
-              >
-                <AddIcon /> Add game
-              </Fab>
-            </section>
+            <CurrentList />
           </Grid>
           <Grid item xs={12} sm={3} md={6}>
             <div className="content">

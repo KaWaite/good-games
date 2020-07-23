@@ -32,6 +32,16 @@
   }
 }
 
+.match-list {
+  h4 {
+    font-weight: 500;
+  }
+
+  &:hover > * {
+    cursor: pointer;
+  }
+}
+
 @media only screen and(min-width: 700px) {
   .current-list {
     margin: 5px;
