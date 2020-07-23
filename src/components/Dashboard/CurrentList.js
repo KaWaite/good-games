@@ -23,6 +23,12 @@ export default function CurrentList() {
     },
   ]);
 
+  const deleteGame = (i) => {
+    const newPlayGames = [...playGames];
+    newPlayGames.splice(i, 1);
+    setPlayGames(newPlayGames);
+  };
+
   return (
     <section className="current-list">
       <Typography variant="h5">
@@ -35,7 +41,9 @@ export default function CurrentList() {
               title={game.title}
               image_url={game.image_url}
               key={i}
-              defaultExpanded="defaultExpanded"
+              gameKey={i}
+              deleteGame={deleteGame}
+              defaultExpanded={true}
             />
           );
         } else {
@@ -44,6 +52,8 @@ export default function CurrentList() {
               title={game.title}
               image_url={game.image_url}
               key={i}
+              gameKey={i}
+              deleteGame={deleteGame}
             />
           );
         }

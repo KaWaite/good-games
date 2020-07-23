@@ -12,6 +12,8 @@ import {
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
+import AreYouSureAlert from "./AreYouSureAlert";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -53,24 +55,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CurrentList(props) {
+  const { title, image_url, gameKey, deleteGame, ...rest } = props;
   const classes = useStyles();
-
-  // functions
-  const handleDelete = (e) => {
-    e.preventDefault();
-    console.log(e.target.parentNode.parentNode.parentNode);
-  };
 
   return (
     <div className={classes.root}>
-      <Accordion {...props} className={classes.card}>
+      <Accordion {...rest} className={classes.card}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1c-content"
           id="panel1c-header"
         >
           <div className={classes.column}>
-            <Typography className={classes.heading}>{props.title}</Typography>
+            <Typography className={classes.heading}>{title}</Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
@@ -80,7 +77,7 @@ export default function CurrentList(props) {
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
           <div className={classes.column}>
-            <img src={props.image_url} alt="cover" className={classes.image} />
+            <img src={image_url} alt="cover" className={classes.image} />
           </div>
           {/* <div className={classes.column}>
             <Chip
@@ -105,15 +102,7 @@ export default function CurrentList(props) {
         </AccordionDetails>
         <Divider />
         <AccordionActions className="button-container">
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="small"
-            aria-label="Remove from list"
-            onClick={handleDelete}
-          >
-            <Typography variant="button">X</Typography>
-          </Button>
+          <AreYouSureAlert deleteGame={deleteGame} itemId={gameKey} />
           <Button variant="contained" size="small" color="primary">
             <Typography variant="button">Update</Typography>
           </Button>
