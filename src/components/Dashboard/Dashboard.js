@@ -47,7 +47,7 @@ export default function Dashboard(props) {
 
   useEffect(() => {
     fetchTokenInfo();
-  }, []);
+  });
 
   return (
     <div className={`dashboard ${classes.root}`}>
