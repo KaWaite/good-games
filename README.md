@@ -22,9 +22,10 @@ React
 
 ## Plans
 
-[ ] Login/Signup  
-[ ] Sessions/Token(to remember user, etc)  
+[X] Login/Signup  
+[X] Sessions/Token(to remember user, etc)  
+[ ] Add to user game list
 [ ] Caching (to not make redundant api calls)  
-[ ] Rate games, with average on gamecard 
-[ ] Add to user game list 
-[ ] Time to beat  
+[ ] rate limiting
+[ ] Rate games, with average on gamecard
+[ ] Time to beat
