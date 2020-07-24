@@ -42,6 +42,10 @@
   }
 }
 
+.add-game-form > * {
+  width: 500px;
+}
+
 @media only screen and(min-width: 700px) {
   .current-list {
     margin: 5px;

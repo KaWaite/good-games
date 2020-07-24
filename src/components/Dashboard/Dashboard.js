@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Redirect } from "react-router-dom";
-import axios from "axios";
 import { Typography, Grid, Divider } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,40 +20,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard(props) {
-  const [user, setUser] = useState({});
-
   const classes = useStyles();
-
-  // functions
-  const fetchTokenInfo = async () => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}`, {
-        headers: {
-          authorization: `Bearer ${localStorage.token}`,
-        },
-      });
-      if (response.data.user) {
-        setUser(response.data.user);
-      } else {
-        localStorage.removeItem("token");
-        props.handleAuthorization();
-        setUser(null);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchTokenInfo();
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <div className={`dashboard ${classes.root}`}>
       <div className="dashboard-content">
         <Typography variant="h3" component="h1">
-          Goodday, {user.username}
+          Goodday, {props.user.username}
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={9} md={6}>
@@ -81,7 +53,7 @@ export default function Dashboard(props) {
       </div>
       <Divider />
       {/* Redirect when token is absent or expired/invalid */}
-      {!user && <Redirect to="/login" />}
+      {!props.user && <Redirect to="/login" />}
     </div>
   );
 }

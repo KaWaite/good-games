@@ -5,6 +5,7 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import axios from "axios";
 import "./css/main.scss";
 
 // Component imports
@@ -27,16 +28,51 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState(null);
+  const [user, setUser] = useState({});
 
   // functions
   const handleAuthorization = () => {
     if (localStorage.token) {
       setIsLoggedIn(true);
+      fetchTokenInfo();
     } else {
       setIsLoggedIn(false);
     }
   };
 
+  useEffect(() => {
+    handleAuthorization();
+    // eslint-disable-next-line
+  }, []);
+
+  const fetchTokenInfo = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/user`,
+        {
+          headers: {
+            authorization: `Bearer ${localStorage.token}`,
+          },
+        }
+      );
+      if (response.data.user) {
+        setUser(response.data.user);
+      } else {
+        localStorage.removeItem("token");
+        handleAuthorization();
+        setUser(null);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // useEffect(() => {
+  //   fetchTokenInfo();
+  //   // eslint-disable-next-line
+  // }, [isLoggedIn]);
+
+  // functions - search
   const resetSearch = () => {
     setSearch(null);
   };
@@ -54,14 +90,11 @@ function App() {
 
   // }
 
-  useEffect(() => {
-    handleAuthorization();
-  }, []);
-
   return (
     <Router>
       <div className="App">
         <TopBar
+          user={user}
           isLoggedIn={isLoggedIn}
           handleAuthorization={handleAuthorization}
         />
@@ -116,9 +149,9 @@ function App() {
               if (isLoggedIn) {
                 return (
                   <Dashboard
-                    handleAuthorization={handleAuthorization}
                     handleChange={handleChange}
                     submitSearch={submitSearch}
+                    user={user}
                   />
                 );
               } else {

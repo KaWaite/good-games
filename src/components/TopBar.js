@@ -6,6 +6,8 @@ import {
   AppBar,
   Toolbar,
   Button,
+  Typography,
+  Divider,
   // IconButton,
   // InputBase,
 } from "@material-ui/core";
@@ -35,6 +37,12 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+  },
+  divider: {
+    width: "1px",
+    height: "20px",
+    background: "rgb(100, 100, 100)",
+    marginLeft: "8px",
   },
 }));
 
@@ -70,6 +78,10 @@ export default function TopBar(props) {
                 Dashboard
               </Button>
               <div className={classes.grow} />
+              <Typography variant="subtitle2" className="navbar-username">
+                {props.user.username}
+              </Typography>
+              <Divider orientation="vertical" className={classes.divider} />
               <Button onClick={logout} component={Link} to="/">
                 Logout
               </Button>

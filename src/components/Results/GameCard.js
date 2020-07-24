@@ -46,11 +46,11 @@ export default function GameCard(props) {
     developer,
     rating,
     image_url,
-    ...rest
+    elevation,
   } = props;
 
   return (
-    <Card {...rest} className={`game-card ${classes.root}`}>
+    <Card elevation={elevation} className={`game-card ${classes.root}`}>
       <CardActionArea
         className={classes.cover}
         component={Link}

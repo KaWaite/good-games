@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CurrentList(props) {
-  const { title, image_url, gameKey, deleteGame, ...rest } = props;
+export default function CurrentListItem(props) {
+  const { title, image_url, listOrder, deleteGame, play_time, ...rest } = props;
   const classes = useStyles();
 
   return (
@@ -71,7 +71,7 @@ export default function CurrentList(props) {
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
-              Playing Time: 20hrs
+              Playing Time: {play_time} hours
             </Typography>
           </div>
         </AccordionSummary>
@@ -102,7 +102,7 @@ export default function CurrentList(props) {
         </AccordionDetails>
         <Divider />
         <AccordionActions className="button-container">
-          <AreYouSureAlert deleteGame={deleteGame} itemId={gameKey} />
+          <AreYouSureAlert deleteGame={deleteGame} listOrder={listOrder} />
           <Button variant="contained" size="small" color="primary">
             <Typography variant="button">Update</Typography>
           </Button>

@@ -12,10 +12,12 @@ import {
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import GameCard from "../Results/GameCard";
+import GameCard from "../../Results/GameCard";
+import Notice from "../../Popups/Notice";
 
 export default function GameForm(props) {
   const [open, setOpen] = useState(false);
+  const [showNotice, setShowNotice] = useState(null);
   const [formData, setFormData] = useState();
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -31,7 +33,6 @@ export default function GameForm(props) {
           )
         ).data;
         setResults(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -44,6 +45,7 @@ export default function GameForm(props) {
 
   const handleClose = () => {
     setOpen(false);
+    setShowNotice(false);
     setResults([]);
     setSearch("");
     setFormData();
@@ -56,15 +58,39 @@ export default function GameForm(props) {
   const addGameToForm = (e) => {
     e.preventDefault();
     setFormData({
+      _id: results[e.target.id]._id,
       title: results[e.target.id].title,
       image_url: results[e.target.id].image_url,
+      // listOrder: props.playGames.length + 1,
     });
     setResults([]);
   };
 
-  const addGame = () => {
-    props.setPlayGames([...props.playGames, formData]);
-    handleClose();
+  const addToCurrentGamesList = async (e) => {
+    if (
+      !formData ||
+      props.userGameData.filter((game) => game.title === formData.title)
+        .length > 0
+    ) {
+      setShowNotice(true);
+    } else {
+      try {
+        const headers = {
+          "content-type": "application/json",
+          authorization: `Bearer ${localStorage.token}`,
+        };
+        await axios.post(
+          `${process.env.REACT_APP_API_URL}/user/add`,
+          formData,
+          {
+            headers: headers,
+          }
+        );
+        handleClose();
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
 
   useEffect(() => {
@@ -85,9 +111,11 @@ export default function GameForm(props) {
         <AddIcon /> Add game
       </Fab>
       <Dialog
+        maxWidth="sm"
+        fullWidth={true}
         open={open}
         onClose={handleClose}
-        aria-labelledby="form-dialog-title"
+        aria-labelledby="add game form"
       >
         <DialogTitle id="form-dialog-title">Add Game</DialogTitle>
         <DialogContent>
@@ -112,14 +140,14 @@ export default function GameForm(props) {
               <GameCard
                 title={formData.title}
                 image_url={formData.image_url}
-                elevation={`elevation="0"`}
+                elevation={0}
               />
-              {/* <ListChoiceRadio /> */}
             </>
           )}
           <div className="match-list">
             {results.map((game, i) => (
               <h4
+                key={i}
                 id={i}
                 onClick={addGameToForm}
                 onMouseOver={(e) => (e.target.style.fontWeight = "700")}
@@ -143,12 +171,18 @@ export default function GameForm(props) {
             variant="contained"
             size="small"
             color="primary"
-            onClick={addGame}
+            onClick={addToCurrentGamesList}
           >
             Add
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Notice
+        showNotice={showNotice}
+        setShowNotice={setShowNotice}
+        info="Sorry, that game is either already in your list or not in our database."
+      />
     </div>
   );
 }

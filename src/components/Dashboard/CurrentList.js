@@ -1,65 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Typography } from "@material-ui/core";
 
 import CurrentListItem from "./CurrentListItem";
-import GameForm from "./GameForm";
+import GameForm from "./AddGameForm/GameForm";
 
 export default function CurrentList() {
-  const [playGames, setPlayGames] = useState([
-    {
-      title: "The Witcher 3: Wild Hunt",
-      image_url:
-        "https://www.mobygames.com/images/covers/l/305108-the-witcher-3-wild-hunt-playstation-4-front-cover.jpg",
-    },
-    {
-      title: "The Last of Us",
-      image_url:
-        "https://images.pushsquare.com/games/ps4/last_of_us_remastered/cover_large.jpg",
-    },
-    {
-      title: "Uncharted",
-      image_url:
-        "https://www.moregameslike.com/wp-content/uploads/2017/07/Uncharted-Drakes-Fortune.jpg",
-    },
-  ]);
+  const [userGameData, setUserGameData] = useState([]);
 
-  const deleteGame = (i) => {
-    const newPlayGames = [...playGames];
-    newPlayGames.splice(i, 1);
-    setPlayGames(newPlayGames);
+  const fetchCurrentUserGameData = async () => {
+    try {
+      const response = (
+        await axios.get(`${process.env.REACT_APP_API_URL}/user/games/current`, {
+          headers: {
+            authorization: `Bearer ${localStorage.token}`,
+          },
+        })
+      ).data;
+      setUserGameData(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  useEffect(() => {
+    fetchCurrentUserGameData();
+  }, []);
+
+  //   const deleteGame = (i) => {
+  //     const newPlayGames = [...playGames];
+  //     newPlayGames.splice(i, 1);
+  //     setPlayGames(newPlayGames);
+  //   };
 
   return (
     <section className="current-list">
       <Typography variant="h5">
-        Currently playing - {playGames.length}
+        Currently playing - {userGameData.length}
       </Typography>
-      {playGames.map((game, i) => {
+      {userGameData.map((game, i) => {
         if (i === 0) {
           return (
             <CurrentListItem
-              title={game.title}
-              image_url={game.image_url}
-              key={i}
-              gameKey={i}
-              deleteGame={deleteGame}
+              title={game.game.title}
+              image_url={game.game.image_url}
+              key={game.game._id}
+              play_time={game.play_time}
+              //   deleteGame={deleteGame}
               defaultExpanded={true}
             />
           );
         } else {
           return (
             <CurrentListItem
-              title={game.title}
-              image_url={game.image_url}
-              key={i}
-              gameKey={i}
-              deleteGame={deleteGame}
+              title={game.game.title}
+              image_url={game.game.image_url}
+              key={game.game._id}
+              play_time={game.play_time}
+              //   deleteGame={deleteGame}
             />
           );
         }
       })}
       {/* <CurrentList defaultExpanded="defaultExpanded" /> */}
-      <GameForm playGames={playGames} setPlayGames={setPlayGames} />
+      <GameForm userGameData={userGameData} />
     </section>
   );
 }

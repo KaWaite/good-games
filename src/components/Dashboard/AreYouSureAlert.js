@@ -21,7 +21,7 @@ export default function AreYouSureAlert(props) {
   };
 
   const handleCloseAndDelete = () => {
-    props.deleteGame(props.gameKey);
+    props.deleteGame(props.listOrder);
     handleClose();
   };
 
