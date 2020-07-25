@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import ReactLoading from "react-loading";
 import axios from "axios";
 import Joi from "joi";
@@ -28,7 +27,6 @@ export default function SignUp(props) {
   });
   const [alertMessage, setAlertMessage] = useState("");
   const [open, setOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
   const [signingUp, setSigningUp] = useState(false);
 
   const classes = useStyles();
@@ -80,9 +78,8 @@ export default function SignUp(props) {
           )
         ).data;
         localStorage.token = result.token;
-        props.handleAuthorization();
         setTimeout(() => {
-          setSuccess(true);
+          props.setIsLoggedIn(true);
         }, 1000);
       } catch (err) {
         setSigningUp(false);
@@ -128,8 +125,6 @@ export default function SignUp(props) {
 
   return (
     <div className="form-container">
-      {/* If signup is successful, redirect to login page */}
-      {success && <Redirect to="/dashboard" />}
       {/* While signing up, show loading image */}
       {signingUp ? (
         <ReactLoading
