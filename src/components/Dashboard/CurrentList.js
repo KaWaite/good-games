@@ -63,7 +63,7 @@ export default function CurrentList() {
         }
       })}
       {/* <CurrentList defaultExpanded="defaultExpanded" /> */}
-      <GameForm userGameData={userGameData} />
+      <GameForm userGameData={userGameData} setUserGameData={setUserGameData} />
     </section>
   );
 }

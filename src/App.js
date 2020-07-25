@@ -25,18 +25,24 @@ import Error500 from "./components/Errors/Error500";
 import { PrivateRoute } from "./router/_private";
 
 function App() {
+  const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [search, setSearch] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState(null);
-  const [user, setUser] = useState({});
 
   // functions
+  // Check if token, if token and user do nothing, if token and no user, get user info.
+  // Or else log out and set user to empty object
   const handleAuthorization = () => {
     if (localStorage.token) {
-      setIsLoggedIn(true);
+      if (user.username) {
+        return;
+      }
       fetchTokenInfo();
+      setIsLoggedIn(true);
     } else {
       setIsLoggedIn(false);
+      setUser({});
     }
   };
 
@@ -60,10 +66,10 @@ function App() {
       } else {
         localStorage.removeItem("token");
         handleAuthorization();
-        setUser(null);
       }
     } catch (err) {
       console.log(err);
+      setIsLoggedIn(false);
     }
   };
 
@@ -124,20 +130,24 @@ function App() {
           <Route
             path="/login"
             render={() => {
-              if (isLoggedIn) {
-                return <Redirect to="/dashboard" />;
+              if (!isLoggedIn) {
+                return (
+                  <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
+                );
               } else {
-                return <Login handleAuthorization={handleAuthorization} />;
+                return <Redirect to="/dashboard" />;
               }
             }}
           />
           <Route
             path="/join-the-dark-side"
             render={() => {
-              if (isLoggedIn) {
-                return <Redirect to="/dashboard" />;
+              if (!isLoggedIn) {
+                return (
+                  <SignUp setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
+                );
               } else {
-                return <SignUp handleAuthorization={handleAuthorization} />;
+                return <Redirect to="/dashboard" />;
               }
             }}
           />

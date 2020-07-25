@@ -69,8 +69,9 @@ export default function GameForm(props) {
   const addToCurrentGamesList = async (e) => {
     if (
       !formData ||
-      props.userGameData.filter((game) => game.title === formData.title)
-        .length > 0
+      props.userGameData.filter(
+        (gamedata) => gamedata.game.title === formData.title
+      ).length > 0
     ) {
       setShowNotice(true);
     } else {
@@ -79,13 +80,16 @@ export default function GameForm(props) {
           "content-type": "application/json",
           authorization: `Bearer ${localStorage.token}`,
         };
-        await axios.post(
-          `${process.env.REACT_APP_API_URL}/user/add`,
-          formData,
-          {
-            headers: headers,
-          }
-        );
+        const updatedList = (
+          await axios.post(
+            `${process.env.REACT_APP_API_URL}/user/add`,
+            formData,
+            {
+              headers: headers,
+            }
+          )
+        ).data;
+        props.setUserGameData(updatedList);
         handleClose();
       } catch (err) {
         console.log(err);

@@ -69,6 +69,7 @@ export default function Login(props) {
         ).data;
         localStorage.token = result.token;
         setTimeout(() => {
+          props.setUser(result.user);
           props.setIsLoggedIn(true);
         }, 1000);
       } catch (err) {
