@@ -10,8 +10,11 @@ import {
   DialogTitle,
   Fab,
   Typography,
+  IconButton,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
+import CloseIcon from "@material-ui/icons/Close";
 
 import GameCard from "../Results/GameCard";
 import Notice from "../Popups/Notice";
@@ -39,6 +42,11 @@ export default function GameForm(props) {
         console.log(err);
       }
     }
+  };
+
+  const handleBack = () => {
+    setFormData();
+    setSearch("");
   };
 
   const handleClickOpen = () => {
@@ -141,10 +149,17 @@ export default function GameForm(props) {
         onClose={handleClose}
         aria-labelledby="add game form"
       >
-        <DialogTitle id="form-dialog-title">Add Game</DialogTitle>
-        <DialogContent>
-          {!formData ? (
-            <>
+        <IconButton
+          aria-label="close"
+          style={{ position: "absolute", right: "3px", top: "3px" }}
+          onClick={handleClose}
+        >
+          <CloseIcon />
+        </IconButton>
+        {!formData ? (
+          <>
+            <DialogTitle id="form-dialog-title">Add Game</DialogTitle>
+            <DialogContent className="game-form-content">
               <DialogContentText>
                 Search game to be added.
                 {/* Then choose which list you would like it to be added to. */}
@@ -158,48 +173,46 @@ export default function GameForm(props) {
                 fullWidth
                 onChange={handleChange}
               />
-            </>
-          ) : (
-            <>
+              <div className="match-list">
+                {results.map((game, i) => (
+                  <h4
+                    key={i}
+                    id={i}
+                    onClick={addGameToForm}
+                    onMouseOver={(e) => (e.target.style.fontWeight = "700")}
+                    onMouseLeave={(e) => (e.target.style.fontWeight = "500")}
+                  >
+                    {game.title}
+                  </h4>
+                ))}
+              </div>
+            </DialogContent>
+          </>
+        ) : (
+          <>
+            <DialogContent>
               <GameCard
                 title={formData.title}
                 image_url={formData.image_url}
                 elevation={0}
               />
-            </>
-          )}
-          <div className="match-list">
-            {results.map((game, i) => (
-              <h4
-                key={i}
-                id={i}
-                onClick={addGameToForm}
-                onMouseOver={(e) => (e.target.style.fontWeight = "700")}
-                onMouseLeave={(e) => (e.target.style.fontWeight = "500")}
+            </DialogContent>
+
+            <DialogActions>
+              <IconButton aria-label="delete" onClick={handleBack}>
+                <KeyboardBackspaceIcon fontSize="large" />
+              </IconButton>
+              <Button
+                variant="contained"
+                size="small"
+                color="secondary"
+                onClick={addToCurrentGamesList}
               >
-                {game.title}
-              </h4>
-            ))}
-          </div>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant="outlined"
-            color="secondary"
-            size="small"
-            onClick={handleClose}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            onClick={addToCurrentGamesList}
-          >
-            Add
-          </Button>
-        </DialogActions>
+                Add
+              </Button>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
 
       <Notice

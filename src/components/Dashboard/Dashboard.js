@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Typography, Grid, Divider, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";

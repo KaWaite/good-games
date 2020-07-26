@@ -53,18 +53,22 @@
 
   .current-list-item-image {
     width: 100%;
-    cursor: pointer;
+    // cursor: pointer;
     border-radius: 2px;
 
     &:hover {
-      background-color: #000;
-      opacity: 0.9;
+      // background-color: #000;
+      // opacity: 0.9;
     }
   }
 
   .current-list-badge {
     float: right;
   }
+}
+
+.game-form-content {
+  margin-bottom: 20px;
 }
 .game-form-notice {
   background: rgb(245, 155, 20);

@@ -45,12 +45,13 @@ export default function GameWikiTop(props) {
       />
       <CardMedia className="game-wiki-image" image={image_url} title={title} />
       <CardActions>
-        <IconButton aria-label="add to gamelist" title="Add to gamelist">
+        <IconButton
+          aria-label="add to gamelist"
+          title="Add to gamelist"
+          onClick={() => alert("bing")}
+        >
           <FavoriteIcon />
         </IconButton>
-        {/* <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
       </CardActions>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">

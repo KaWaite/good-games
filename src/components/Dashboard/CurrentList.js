@@ -23,10 +23,6 @@ export default function CurrentList() {
     }
   };
 
-  useEffect(() => {
-    fetchCurrentUserGameData();
-  }, []);
-
   const deleteGame = async (id) => {
     try {
       const updatedList = (
@@ -41,6 +37,14 @@ export default function CurrentList() {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    fetchCurrentUserGameData();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [userGameData]);
 
   return (
     <section className="current-list">

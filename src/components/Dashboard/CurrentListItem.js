@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import {
@@ -34,9 +35,16 @@ const useStyles = makeStyles((theme) => ({
   column: {
     flexBasis: "50%",
   },
+  columnLeft: {
+    flexBasis: "60%",
+  },
+  columnRight: {
+    flexBasis: "35%",
+  },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
-    padding: theme.spacing(1, 2),
+    padding: theme.spacing(1),
+    marginLeft: "8px",
   },
   link: {
     textDecoration: "none",
@@ -68,23 +76,22 @@ export default function CurrentListItem(props) {
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
-          <div className={classes.column}>
+          <Link className={classes.columnLeft} to={`/game/${game_id}`}>
             <img
               src={image_url}
               alt="cover"
               className="current-list-item-image"
-              onClick={() => alert("yahooo")}
             />
-          </div>
-          <div className={clsx(classes.column, classes.helper)}>
+          </Link>
+          <div className={clsx(classes.columnRight, classes.helper)}>
             <Typography variant="caption">
-              Special Trophy Obtained 4/2
+              Special Trophy 4/2
               <br />
-              Extra Special Trophy Obtained 4/1
+              Extra Special Trophy 4/1
               <br />
-              Special Trophy Obtained 3/25
+              Special Trophy 3/25
               <br />
-              Special Trophy Obtained 3/13
+              Special Trophy 3/13
               <br />
             </Typography>
           </div>

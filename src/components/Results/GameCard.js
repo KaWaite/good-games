@@ -61,13 +61,6 @@ export default function GameCard(props) {
           image={image_url}
           title="game art"
         />
-        {/* <CardMedia
-          className={classes.media}
-          image={require(`../images/covers/${props.title
-            .toLowerCase()
-            .replace(/\s/g, "")}.jpg`)}
-          title="game art"
-        /> */}
       </CardActionArea>
       <div className={classes.details}>
         <CardContent className={classes.content}>
