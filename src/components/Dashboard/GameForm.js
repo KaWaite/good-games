@@ -119,6 +119,7 @@ export default function GameForm(props) {
         ).data;
         props.setUserGameData(updatedList);
         handleClose();
+        window.scrollTo(0, 0);
       } catch (err) {
         console.log(err);
       }

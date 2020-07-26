@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
     height: "20px",
     background: "rgb(100, 100, 100)",
     marginLeft: "8px",
+    marginRight: "4px",
   },
 }));
 
@@ -74,8 +75,8 @@ export default function TopBar(props) {
                 Dashboard
               </Button>
               <div className={classes.grow} />
-              <Typography variant="subtitle2" className="navbar-username">
-                {props.user.username}
+              <Typography variant="subtitle1" className="navbar-username">
+                <i>{props.user.username}</i>
               </Typography>
               <Divider orientation="vertical" className={classes.divider} />
               <Button onClick={logout} component={Link} to="/">

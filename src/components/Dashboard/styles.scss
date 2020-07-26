@@ -53,12 +53,12 @@
 
   .current-list-item-image {
     width: 100%;
-    // cursor: pointer;
+    cursor: pointer;
     border-radius: 2px;
 
     &:hover {
-      // background-color: #000;
-      // opacity: 0.9;
+      background-color: #000;
+      opacity: 0.9;
     }
   }
 
@@ -92,11 +92,10 @@
 
 @media only screen and(min-width: 700px) {
   .dashboard {
-    .dashboard-content {
-      h1 {
-        // display: block;
-        margin: 20px 0 20px 7px;
-      }
+    .dashboard-header {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
     }
 
     .current-list {
@@ -106,6 +105,11 @@
 }
 
 @media only screen and(min-width: 1024px) {
+  .dashboard {
+    .dashboard-header {
+      // margin-top: 40px;
+    }
+  }
 }
 @media only screen and (min-width: 1200px) {
 }
