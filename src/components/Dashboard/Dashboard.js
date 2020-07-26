@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Typography, Grid, Divider } from "@material-ui/core";
+import { Typography, Grid, Divider, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import CurrentList from "./CurrentList";
@@ -24,10 +24,16 @@ export default function Dashboard(props) {
 
   return (
     <div className={`dashboard ${classes.root}`}>
-      <div className="dashboard-content">
+      <div className="dashboard-header">
+        <Avatar
+          src={require("../../images/iconfinder__Pokemon_1337519.svg")}
+          className="dashboard-avatar"
+        />
         <Typography variant="h3" component="h1">
-          Goodday, {props.user.username}
+          {props.user.username}
         </Typography>
+      </div>
+      <div className="dashboard-content">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={9} md={6}>
             <CurrentList />

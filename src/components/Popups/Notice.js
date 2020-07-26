@@ -1,18 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles((theme) => ({
-  typography: {
-    padding: theme.spacing(2),
-    background: "orange",
-  },
-}));
 
 export default function SimplePopover(props) {
-  const classes = useStyles();
-
   const handleClose = () => {
     props.setShowNotice(null);
   };
@@ -35,7 +24,7 @@ export default function SimplePopover(props) {
           horizontal: "center",
         }}
       >
-        <Typography className={classes.typography}>{props.info}</Typography>
+        {props.info}
       </Popover>
     </div>
   );

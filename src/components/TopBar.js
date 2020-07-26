@@ -22,10 +22,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     padding: 0,
   },
-  dashboardButton: {
-    marginLeft: theme.spacing(3),
-    // background: "brown",
-  },
   grow: {
     flexGrow: 1,
   },
@@ -71,7 +67,7 @@ export default function TopBar(props) {
           {props.isLoggedIn ? (
             <>
               <Button
-                className={classes.dashboardButton}
+                className="topbar-dashboard-btn"
                 component={Link}
                 to="/dashboard"
               >

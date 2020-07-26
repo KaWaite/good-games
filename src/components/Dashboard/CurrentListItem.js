@@ -28,11 +28,6 @@ const useStyles = makeStyles((theme) => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
   },
-  icon: {
-    verticalAlign: "bottom",
-    height: 20,
-    width: 20,
-  },
   details: {
     alignItems: "center",
   },
@@ -49,13 +44,10 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "underline",
     },
   },
-  image: {
-    height: "150px",
-  },
 }));
 
 export default function CurrentListItem(props) {
-  const { title, image_url, listOrder, deleteGame, play_time, ...rest } = props;
+  const { title, image_url, game_id, play_time, deleteGame, ...rest } = props;
   const classes = useStyles();
 
   return (
@@ -77,16 +69,13 @@ export default function CurrentListItem(props) {
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
           <div className={classes.column}>
-            <img src={image_url} alt="cover" className={classes.image} />
-          </div>
-          {/* <div className={classes.column}>
-            <Chip
-              label="Barbados"
-              onDelete={() => {
-                alert("HEY");
-              }}
+            <img
+              src={image_url}
+              alt="cover"
+              className="current-list-item-image"
+              onClick={() => alert("yahooo")}
             />
-          </div> */}
+          </div>
           <div className={clsx(classes.column, classes.helper)}>
             <Typography variant="caption">
               Special Trophy Obtained 4/2
@@ -102,7 +91,7 @@ export default function CurrentListItem(props) {
         </AccordionDetails>
         <Divider />
         <AccordionActions className="button-container">
-          <AreYouSureAlert deleteGame={deleteGame} listOrder={listOrder} />
+          <AreYouSureAlert deleteGame={deleteGame} id={game_id} />
           <Button variant="contained" size="small" color="primary">
             <Typography variant="button">Update</Typography>
           </Button>

@@ -16,7 +16,7 @@ export default function SearchInput(props) {
   const classes = useStyles();
 
   return (
-    <Paper component="textfield" className={classes.root}>
+    <Paper className={classes.root}>
       <InputBase
         className={classes.input}
         placeholder="Search game..."

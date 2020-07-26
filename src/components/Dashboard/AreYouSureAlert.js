@@ -20,8 +20,8 @@ export default function AreYouSureAlert(props) {
     setOpen(false);
   };
 
-  const handleCloseAndDelete = () => {
-    props.deleteGame(props.listOrder);
+  const handleDeleteAndClose = () => {
+    props.deleteGame(props.id);
     handleClose();
   };
 
@@ -47,8 +47,9 @@ export default function AreYouSureAlert(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            If you go through with it, you will <b>lose all your data</b>. Your
-            play time, rating and trophy data will be lost.
+            If you go through with it, you will{" "}
+            <strong>lose all your data</strong>. Your play time, rating and
+            trophy data will be lost.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -56,7 +57,7 @@ export default function AreYouSureAlert(props) {
             Cancel
           </Button>
           <Button
-            onClick={handleCloseAndDelete}
+            onClick={handleDeleteAndClose}
             variant="contained"
             color="primary"
             autoFocus

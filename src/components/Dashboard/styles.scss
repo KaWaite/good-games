@@ -1,27 +1,47 @@
 .dashboard {
   max-width: 1100px;
-  margin: 30px auto 100px auto;
+  margin: 15px auto 100px auto;
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    margin: 0 13px 2px 13px;
+    padding-bottom: 13px;
+    border-bottom: 1px solid rgb(83, 79, 79);
+
+    .dashboard-avatar {
+      width: 80px;
+      height: 80px;
+      background: rgb(105, 61, 61);
+    }
+    h1 {
+      margin-left: 20px;
+      color: rgb(255, 255, 255);
+      display: inline-block;
+    }
+  }
 
   .dashboard-content {
     color: white;
     padding-bottom: 100px;
-
-    h1 {
-      margin: 20px 0 20px 7px;
-    }
   }
 }
 
 .current-list {
-  margin: 3px -3px;
+  margin: 3px;
 
   * {
     color: white;
   }
 
-  h5 {
+  h6 {
     margin-left: 13px;
+
+    span {
+      margin-right: 13px;
+    }
   }
+
   .plus-button {
     float: right;
     margin: 7px 12px 0 0;
@@ -30,6 +50,26 @@
   .button-container {
     background: rgb(54, 53, 53);
   }
+
+  .current-list-item-image {
+    width: 100%;
+    cursor: pointer;
+    border-radius: 2px;
+
+    &:hover {
+      background-color: #000;
+      opacity: 0.9;
+    }
+  }
+
+  .current-list-badge {
+    float: right;
+  }
+}
+.game-form-notice {
+  background: rgb(245, 155, 20);
+  padding: 10px;
+  color: rgb(255, 255, 255);
 }
 
 .match-list {
@@ -47,8 +87,17 @@
 }
 
 @media only screen and(min-width: 700px) {
-  .current-list {
-    margin: 5px;
+  .dashboard {
+    .dashboard-content {
+      h1 {
+        // display: block;
+        margin: 20px 0 20px 7px;
+      }
+    }
+
+    .current-list {
+      margin: 5px;
+    }
   }
 }
 

@@ -9,15 +9,17 @@ import {
   DialogContentText,
   DialogTitle,
   Fab,
+  Typography,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import GameCard from "../../Results/GameCard";
-import Notice from "../../Popups/Notice";
+import GameCard from "../Results/GameCard";
+import Notice from "../Popups/Notice";
 
 export default function GameForm(props) {
   const [open, setOpen] = useState(false);
   const [showNotice, setShowNotice] = useState(null);
+  const [noticeInfo, setNoticeInfo] = useState("");
   const [formData, setFormData] = useState();
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
@@ -61,7 +63,6 @@ export default function GameForm(props) {
       _id: results[e.target.id]._id,
       title: results[e.target.id].title,
       image_url: results[e.target.id].image_url,
-      // listOrder: props.playGames.length + 1,
     });
     setResults([]);
   };
@@ -73,6 +74,25 @@ export default function GameForm(props) {
         (gamedata) => gamedata.game.title === formData.title
       ).length > 0
     ) {
+      setNoticeInfo(
+        <Typography className="game-form-notice" variant="body1">
+          Sorry, that game is either already in your list or not in our
+          database.
+        </Typography>
+      );
+      setShowNotice(true);
+    } else if (props.userGameData.length >= 5) {
+      setNoticeInfo(
+        <Typography className="game-form-notice" variant="body1">
+          Sorry, we only allow currently being played games to reach a{" "}
+          <strong>max of 5 games</strong>. We believe in getting{" "}
+          <strong>full enjoyment</strong> out of games, and that 5 is the max
+          before someone is potentially only playing out of habit or attempting
+          to get through their backlog. Please{" "}
+          <strong>enjoy the current lineup first</strong> before starting
+          anything else.
+        </Typography>
+      );
       setShowNotice(true);
     } else {
       try {
@@ -126,8 +146,8 @@ export default function GameForm(props) {
           {!formData ? (
             <>
               <DialogContentText>
-                Search game to be added. Then choose which list you would like
-                it to be added to.
+                Search game to be added.
+                {/* Then choose which list you would like it to be added to. */}
               </DialogContentText>
               <TextField
                 autoFocus
@@ -185,7 +205,7 @@ export default function GameForm(props) {
       <Notice
         showNotice={showNotice}
         setShowNotice={setShowNotice}
-        info="Sorry, that game is either already in your list or not in our database."
+        info={noticeInfo}
       />
     </div>
   );

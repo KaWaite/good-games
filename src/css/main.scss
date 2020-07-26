@@ -64,6 +64,10 @@ ul {
       * {
         color: white;
       }
+
+      .topbar-dashboard-btn {
+        margin-left: 5px;
+      }
     }
   }
 
@@ -122,9 +126,15 @@ ul {
 
 @media only screen and(min-width: 1024px) {
   .App {
-    .topbar-content {
-      width: 80%;
-      margin: 0 auto;
+    .topbar {
+      .topbar-content {
+        width: 80%;
+        margin: 0 auto;
+
+        .topbar-dashboard-btn {
+          margin-left: 30px;
+        }
+      }
     }
 
     .content {

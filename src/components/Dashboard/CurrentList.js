@@ -3,7 +3,7 @@ import axios from "axios";
 import { Typography } from "@material-ui/core";
 
 import CurrentListItem from "./CurrentListItem";
-import GameForm from "./AddGameForm/GameForm";
+import GameForm from "./GameForm";
 
 export default function CurrentList() {
   const [userGameData, setUserGameData] = useState([]);
@@ -27,16 +27,26 @@ export default function CurrentList() {
     fetchCurrentUserGameData();
   }, []);
 
-  //   const deleteGame = (i) => {
-  //     const newPlayGames = [...playGames];
-  //     newPlayGames.splice(i, 1);
-  //     setPlayGames(newPlayGames);
-  //   };
+  const deleteGame = async (id) => {
+    try {
+      const updatedList = (
+        await axios.delete(`${process.env.REACT_APP_API_URL}/user/game/${id}`, {
+          headers: {
+            authorization: `Bearer ${localStorage.token}`,
+          },
+        })
+      ).data;
+      setUserGameData(updatedList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <section className="current-list">
-      <Typography variant="h5">
-        Currently playing - {userGameData.length}
+      <Typography variant="h6">
+        Currently playing{" "}
+        <span className="current-list-badge">{userGameData.length}/5</span>
       </Typography>
       {userGameData.map((game, i) => {
         if (i === 0) {
@@ -45,8 +55,9 @@ export default function CurrentList() {
               title={game.game.title}
               image_url={game.game.image_url}
               key={game.game._id}
+              game_id={game.game._id}
               play_time={game.play_time}
-              //   deleteGame={deleteGame}
+              deleteGame={deleteGame}
               defaultExpanded={true}
             />
           );
@@ -56,13 +67,13 @@ export default function CurrentList() {
               title={game.game.title}
               image_url={game.game.image_url}
               key={game.game._id}
+              game_id={game.game._id}
               play_time={game.play_time}
-              //   deleteGame={deleteGame}
+              deleteGame={deleteGame}
             />
           );
         }
       })}
-      {/* <CurrentList defaultExpanded="defaultExpanded" /> */}
       <GameForm userGameData={userGameData} setUserGameData={setUserGameData} />
     </section>
   );
