@@ -41,6 +41,11 @@ export default function Dashboard(props) {
           <Grid item xs={12} sm={3} md={6}>
             <div className="content">
               <ul>
+                <Search
+                  handleChange={props.handleChange}
+                  submitSearch={props.submitSearch}
+                  show={false}
+                />
                 <li>Recommendations</li>
                 <li>Gaming Challenge</li>
                 <li>Add Friends/Games</li>
@@ -48,11 +53,6 @@ export default function Dashboard(props) {
                 <li>Best games of 2019</li>
                 <li>Settings</li>
               </ul>
-              <Search
-                handleChange={props.handleChange}
-                submitSearch={props.submitSearch}
-                show={false}
-              />
             </div>
           </Grid>
         </Grid>
