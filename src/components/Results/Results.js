@@ -57,10 +57,10 @@ export default function Results(props) {
       <div className="results-container">
         {!isDone ? (
           <ReactLoading
-            type={"cylon"}
-            color="#f44336"
+            type={"bars"}
+            color="rgb(184, 33, 33)"
             height="auto"
-            width="400px"
+            width="250px"
             className="loading"
           />
         ) : (
