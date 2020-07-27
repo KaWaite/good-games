@@ -24,9 +24,9 @@ React
 
 [X] Login/Signup  
 [X] Sessions/Token(to remember user, etc)  
-[X] Add to user game list
-[X] Remove from game list
+[X] Add to user game list 
+[X] Remove from game list 
 [ ] Caching (to not make redundant api calls)  
-[ ] rate limiting
-[ ] Rate games, with average on gamecard
-[ ] Time to beat
+[ ] rate limiting 
+[ ] Rate games, with average on gamecard  
+[ ] Time to beat  
