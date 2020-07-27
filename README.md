@@ -24,7 +24,7 @@ React
 
 [X] Login/Signup  
 [X] Sessions/Token(to remember user, etc)  
-[X] Add to user game list 
+[X] Add to user game list   
 [X] Remove from game list  
 [ ] Caching (to not make redundant api calls)  
 [ ] rate limiting  
