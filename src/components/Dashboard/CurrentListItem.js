@@ -8,12 +8,12 @@ import {
   AccordionSummary,
   AccordionActions,
   Typography,
-  Button,
   Divider,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
 import AreYouSureAlert from "./AreYouSureAlert";
+import EditGame from "./EditGame";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CurrentListItem(props) {
-  const { title, image_url, game_id, play_time, deleteGame, ...rest } = props;
+  const { game, deleteGame, setUserGameData, ...rest } = props;
+  const gameInfo = game.game;
   const classes = useStyles();
 
   return (
@@ -67,18 +68,20 @@ export default function CurrentListItem(props) {
           id="panel1c-header"
         >
           <div className={classes.column}>
-            <Typography className={classes.heading}>{title}</Typography>
+            <Typography className={classes.heading}>
+              {gameInfo.title}
+            </Typography>
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
-              Playing Time: {play_time} hours
+              Playing Time: {game.play_time} hours
             </Typography>
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
-          <Link className={classes.columnLeft} to={`/game/${game_id}`}>
+          <Link className={classes.columnLeft} to={`/game/${gameInfo.game_id}`}>
             <img
-              src={image_url}
+              src={gameInfo.image_url}
               alt="cover"
               className="current-list-item-image"
             />
@@ -98,10 +101,13 @@ export default function CurrentListItem(props) {
         </AccordionDetails>
         <Divider />
         <AccordionActions className="button-container">
-          <AreYouSureAlert deleteGame={deleteGame} id={game_id} />
-          <Button variant="contained" size="small" color="primary">
-            <Typography variant="button">Update</Typography>
-          </Button>
+          <AreYouSureAlert deleteGame={deleteGame} id={gameInfo._id} />
+          <EditGame
+            title={gameInfo.title}
+            id={game._id}
+            play_time={game.play_time}
+            setUserGameData={props.setUserGameData}
+          />
         </AccordionActions>
       </Accordion>
     </div>

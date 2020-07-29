@@ -46,7 +46,7 @@ export default function CurrentList() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [userGameData]);
+  }, [isDone]);
 
   return (
     <section className="current-list">
@@ -60,11 +60,9 @@ export default function CurrentList() {
             if (i === 0) {
               return (
                 <CurrentListItem
-                  title={game.game.title}
-                  image_url={game.game.image_url}
-                  key={game.game._id}
-                  game_id={game.game._id}
-                  play_time={game.play_time}
+                  game={game}
+                  setUserGameData={setUserGameData}
+                  key={game._id}
                   deleteGame={deleteGame}
                   defaultExpanded={true}
                 />
@@ -72,11 +70,9 @@ export default function CurrentList() {
             } else {
               return (
                 <CurrentListItem
-                  title={game.game.title}
-                  image_url={game.game.image_url}
+                  game={game}
+                  setUserGameData={setUserGameData}
                   key={game.game._id}
-                  game_id={game.game._id}
-                  play_time={game.play_time}
                   deleteGame={deleteGame}
                 />
               );
