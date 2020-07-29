@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ReactLoading from "react-loading";
 
 import ResultsOrNot from "./ResultsOrNot";
 
@@ -55,15 +54,7 @@ export default function Results(props) {
   return (
     <div className="results">
       <div className="results-container">
-        {!isDone ? (
-          <ReactLoading
-            type={"bars"}
-            color="rgb(184, 33, 33)"
-            height="auto"
-            width="250px"
-            className="loading"
-          />
-        ) : (
+        {isDone && (
           <ResultsOrNot
             term={term}
             results={results}

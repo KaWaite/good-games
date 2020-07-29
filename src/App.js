@@ -1,48 +1,43 @@
-import React, { useState, useEffect } from "react";
-import {
-  Redirect,
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import ReactLoading from "react-loading";
 import axios from "axios";
 import "./css/main.scss";
 
-// Component imports
-import TopBar from "./components/TopBar";
-import Landing from "./components/LandingPage/Landing";
-import Results from "./components/Results/Results";
-import GameWiki from "./components/GameWiki/GameWiki";
-import Login from "./components/User/Login";
-import SignUp from "./components/User/SignUp";
-import UserProfile from "./components/User/UserProfile";
-import Dashboard from "./components/Dashboard/Dashboard";
-import Footer from "./components/Footer";
-import Error404 from "./components/Errors/Error404";
-import Error500 from "./components/Errors/Error500";
+// Route types
+import { ProtectedRoute } from "./router/ProtectedRoute";
+import { RedirectRoute } from "./router/RedirectRoute";
 
-// Guarded route
-import { PrivateRoute } from "./router/_private";
+// Component imports
+const TopBar = lazy(() => import("./components/TopBar"));
+const Landing = lazy(() => import("./components/LandingPage/Landing"));
+const Results = lazy(() => import("./components/Results/Results"));
+const GameWiki = lazy(() => import("./components/GameWiki/GameWiki"));
+const Login = lazy(() => import("./components/User/Login"));
+const SignUp = lazy(() => import("./components/User/SignUp"));
+const UserProfile = lazy(() => import("./components/User/UserProfile"));
+const Dashboard = lazy(() => import("./components/Dashboard/Dashboard"));
+const Footer = lazy(() => import("./components/Footer"));
+const Error404 = lazy(() => import("./components/Errors/Error404"));
+const Error500 = lazy(() => import("./components/Errors/Error500"));
 
 function App() {
-  const [user, setUser] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
   const [search, setSearch] = useState(null);
   const [searchedTerm, setSearchedTerm] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // functions
-  // Check if token, if token and user do nothing, if token and no user, get user info.
-  // Or else log out and set user to empty object
+  // token authorization check on initial load
   const handleAuthorization = () => {
     if (localStorage.token) {
-      if (user.username) {
+      if (user) {
+        setIsLoading(false);
         return;
       }
       fetchTokenInfo();
-      setIsLoggedIn(true);
     } else {
-      setIsLoggedIn(false);
-      setUser({});
+      setUser(null);
+      setIsLoading(false);
     }
   };
 
@@ -51,6 +46,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  // fetch token
   const fetchTokenInfo = async () => {
     try {
       const response = await axios.get(
@@ -69,14 +65,10 @@ function App() {
       }
     } catch (err) {
       console.log(err);
-      setIsLoggedIn(false);
+      setUser(null);
     }
+    setIsLoading(false);
   };
-
-  // useEffect(() => {
-  //   fetchTokenInfo();
-  //   // eslint-disable-next-line
-  // }, [isLoggedIn]);
 
   // functions - search
   const resetSearch = () => {
@@ -92,92 +84,85 @@ function App() {
     return resetSearch();
   };
 
-  // const loggedInRedirectDashboard = () => {
-
-  // }
-
   return (
-    <Router>
-      <div className="App">
-        <TopBar
-          user={user}
-          isLoggedIn={isLoggedIn}
-          handleAuthorization={handleAuthorization}
+    <Suspense
+      fallback={
+        <ReactLoading
+          type={"bars"}
+          color="#f44336"
+          height="auto"
+          width="300px"
+          className="loading"
         />
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Landing
-                handleChange={handleChange}
-                submitSearch={submitSearch}
-              />
-            )}
-          />
-          <Route
-            path="/results"
-            render={() => (
-              <Results
-                searchedTerm={searchedTerm}
-                handleChange={handleChange}
-                submitSearch={submitSearch}
-              />
-            )}
-          />
-          <Route path="/game/all" render={() => <Results />} />
-          <Route path="/game/:id" render={(props) => <GameWiki {...props} />} />
-          <Route
-            path="/login"
-            render={() => {
-              if (!isLoggedIn) {
-                return (
-                  <Login setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
-                );
-              } else {
-                return <Redirect to="/dashboard" />;
-              }
-            }}
-          />
-          <Route
-            path="/join-the-dark-side"
-            render={() => {
-              if (!isLoggedIn) {
-                return (
-                  <SignUp setIsLoggedIn={setIsLoggedIn} setUser={setUser} />
-                );
-              } else {
-                return <Redirect to="/dashboard" />;
-              }
-            }}
-          />
+      }
+    >
+      <Router>
+        <div className="App">
+          <TopBar user={user} handleAuthorization={handleAuthorization} />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Landing
+                  handleChange={handleChange}
+                  submitSearch={submitSearch}
+                />
+              )}
+            />
+            <Route
+              path="/results"
+              render={() => (
+                <Results
+                  searchedTerm={searchedTerm}
+                  handleChange={handleChange}
+                  submitSearch={submitSearch}
+                />
+              )}
+            />
+            <Route path="/game/all" render={() => <Results />} />
+            <Route
+              path="/game/:id"
+              render={(props) => <GameWiki {...props} />}
+            />
+            <RedirectRoute
+              path="/login"
+              user={user}
+              setUser={setUser}
+              redirectRoute="/dashboard"
+              component={Login}
+            />
+            <RedirectRoute
+              path="/join-the-dark-side"
+              user={user}
+              setUser={setUser}
+              redirectRoute="/dashboard"
+              component={SignUp}
+            />
+            {/* Protected Routes */}
+            <ProtectedRoute
+              path="/dashboard"
+              handleChange={handleChange}
+              submitSearch={submitSearch}
+              user={user}
+              isLoading={isLoading}
+              component={Dashboard}
+            />
+            <ProtectedRoute
+              path="/profile"
+              user={user}
+              isLoading={isLoading}
+              component={UserProfile}
+            />
 
-          {/* User only Routes */}
-          <Route
-            path="/dashboard"
-            render={() => {
-              if (isLoggedIn) {
-                return (
-                  <Dashboard
-                    handleChange={handleChange}
-                    submitSearch={submitSearch}
-                    user={user}
-                  />
-                );
-              } else {
-                return <Redirect to="/login" />;
-              }
-            }}
-          />
-          <PrivateRoute path="/profile" component={UserProfile} />
-
-          {/* Error Routes */}
-          <Route path="/oops" render={() => <Error500 />} />
-          <Route render={() => <Error404 />} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+            {/* Error Routes */}
+            <Route path="/oops" render={() => <Error500 />} />
+            <Route render={() => <Error404 />} />
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
+    </Suspense>
   );
 }
 

@@ -80,7 +80,6 @@ export default function SignUp(props) {
         localStorage.token = result.token;
         setTimeout(() => {
           props.setUser(result.user);
-          props.setIsLoggedIn(true);
         }, 1000);
       } catch (err) {
         setSigningUp(false);

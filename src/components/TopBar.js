@@ -65,7 +65,7 @@ export default function TopBar(props) {
           >
             <img src={logo} alt="good games logo" className="logo" />
           </Button>
-          {props.isLoggedIn ? (
+          {props.user ? (
             <>
               <Button
                 className="topbar-dashboard-btn"

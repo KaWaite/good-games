@@ -46,12 +46,13 @@ export default function Dashboard(props) {
                   submitSearch={props.submitSearch}
                   show={false}
                 />
-                <li>Recommendations</li>
-                <li>Gaming Challenge</li>
-                <li>Add Friends/Games</li>
                 <li>Groups</li>
+                <li>Gaming Challenge</li>
                 <li>Best games of 2019</li>
                 <li>Settings</li>
+                <li>Add Friends</li>
+                <li>Recommendations</li>
+                <li>Want to play list</li>
               </ul>
             </div>
           </Grid>

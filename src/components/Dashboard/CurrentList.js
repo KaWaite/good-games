@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ReactLoading from "react-loading";
 import { Typography } from "@material-ui/core";
 
 import CurrentListItem from "./CurrentListItem";
@@ -51,14 +50,7 @@ export default function CurrentList() {
 
   return (
     <section className="current-list">
-      {!isDone ? (
-        <ReactLoading
-          type={"bars"}
-          color="rgb(184, 33, 33)"
-          height="auto"
-          width="300px"
-        />
-      ) : (
+      {isDone && (
         <>
           <Typography variant="h6">
             Currently playing{" "}

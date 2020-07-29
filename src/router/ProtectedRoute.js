@@ -1,16 +1,23 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-// import Auth from "../store/auth";
 
 const FALLBACK = "/login";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+export const ProtectedRoute = ({
+  component: Component,
+  user,
+  isLoading,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (localStorage.token) {
-          return <Component {...props} />;
+        if (isLoading) {
+          return;
+        }
+        if (user) {
+          return <Component user={user} {...rest} {...props} />;
         } else {
           return <Redirect to={FALLBACK} />;
         }

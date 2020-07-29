@@ -12,6 +12,6 @@
   <!-- <circle cx="50%" cy="50%" r="10%" fill="green" /> -->
 
   <text x="40%" y="70%" font-size="85" text-anchor="middle" fill="black" stroke="white"  class="logo">G</text>
-  <text x="66%" y="80%" font-size="75" text-anchor="middle" fill="rgb(184, 33, 33)" stroke="white"  class="logo">G</text>
+  <text x="66%" y="80%" font-size="75" text-anchor="middle" fill="#f44336" stroke="white"  class="logo">G</text>
 
 </svg>
