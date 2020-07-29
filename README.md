@@ -26,6 +26,7 @@ React
 [X] Sessions/Token(to remember user, etc)  
 [X] Add to user game list   
 [X] Remove from game list  
+[X] update play time of individual games   
 [ ] Caching (to not make redundant api calls)  
 [ ] rate limiting  
 [ ] Rate games, with average on gamecard   
