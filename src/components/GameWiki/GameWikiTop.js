@@ -43,7 +43,12 @@ export default function GameWikiTop(props) {
         title={title}
         subheader={release_date}
       />
-      <CardMedia className="game-wiki-image" image={image_url} title={title} />
+      <CardMedia
+        className="game-wiki-image"
+        component="img"
+        image={image_url}
+        title={title}
+      />
       <CardActions>
         <IconButton
           aria-label="add to gamelist"

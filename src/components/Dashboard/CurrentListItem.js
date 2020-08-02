@@ -79,7 +79,7 @@ export default function CurrentListItem(props) {
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
-          <Link className={classes.columnLeft} to={`/game/${gameInfo.game_id}`}>
+          <Link className={classes.columnLeft} to={`/game/${gameInfo._id}`}>
             <img
               src={gameInfo.image_url}
               alt="cover"
