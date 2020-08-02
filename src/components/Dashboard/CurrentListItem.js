@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "4px auto",
   },
   card: {
-    background: "rgba(54, 54, 54, 0.8)",
+    background: "rgba(54, 54, 54, 1)",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
