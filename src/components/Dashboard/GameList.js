@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 
-import CurrentListItem from "./CurrentListItem";
+import GameListItem from "./GameListItem";
 import GameForm from "./GameForm";
 
-export default function CurrentList() {
-  const [userGameData, setUserGameData] = useState([]);
+export default function GameList({ type, title, total }) {
+  const [gameListData, setGameListData] = useState([]);
   const [isDone, setIsDone] = useState(false);
 
-  const fetchCurrentUserGameData = async () => {
+  const fetchGameListData = async () => {
     try {
       const response = (
-        await axios.get(`${process.env.REACT_APP_API_URL}/user/games/current`, {
+        await axios.get(`${process.env.REACT_APP_API_URL}/user/games/${type}`, {
           headers: {
             authorization: `Bearer ${localStorage.token}`,
           },
         })
       ).data;
-      setUserGameData(response);
+      setGameListData(response);
       setIsDone(true);
     } catch (err) {
       console.log(err);
@@ -28,20 +28,24 @@ export default function CurrentList() {
   const deleteGame = async (id) => {
     try {
       const updatedList = (
-        await axios.delete(`${process.env.REACT_APP_API_URL}/user/game/${id}`, {
-          headers: {
-            authorization: `Bearer ${localStorage.token}`,
-          },
-        })
+        await axios.delete(
+          `${process.env.REACT_APP_API_URL}/user/games/${type}/${id}`,
+          {
+            headers: {
+              authorization: `Bearer ${localStorage.token}`,
+            },
+          }
+        )
       ).data;
-      setUserGameData(updatedList);
+      setGameListData(updatedList);
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    fetchCurrentUserGameData();
+    fetchGameListData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -49,38 +53,43 @@ export default function CurrentList() {
   }, [isDone]);
 
   return (
-    <section className="current-list">
+    <section className="list">
       {isDone && (
         <>
           <Typography variant="h6">
-            Currently playing{" "}
-            <span className="current-list-badge">{userGameData.length}/5</span>
+            {title}{" "}
+            <span className="list-badge">
+              {gameListData.length}/{total}
+            </span>
           </Typography>
-          {userGameData.map((game, i) => {
-            if (i === 0) {
+          {gameListData.map((game, i) => {
+            if (i === 0 && type === "current") {
               return (
-                <CurrentListItem
+                <GameListItem
                   game={game}
-                  setUserGameData={setUserGameData}
+                  setGameListData={setGameListData}
                   key={game._id}
                   deleteGame={deleteGame}
+                  type={type}
                   defaultExpanded={true}
                 />
               );
             } else {
               return (
-                <CurrentListItem
+                <GameListItem
                   game={game}
-                  setUserGameData={setUserGameData}
+                  setGameListData={setGameListData}
                   key={game.game._id}
                   deleteGame={deleteGame}
+                  type={type}
                 />
               );
             }
           })}
           <GameForm
-            userGameData={userGameData}
-            setUserGameData={setUserGameData}
+            gameListData={gameListData}
+            setGameListData={setGameListData}
+            type={type}
           />
         </>
       )}

@@ -11,7 +11,6 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    // minWidth: "88%",
     padding: "50px 0",
   },
   title: {
@@ -31,13 +30,6 @@ export default function AccountBenefits() {
       <div className="container">
         <Card className={classes.root} id="account-benefit-content">
           <CardContent>
-            {/* <Typography
-          className={classes.title}
-          color="textSecondary"
-          gutterBottom
-        >
-          Word of the Day
-        </Typography> */}
             <Typography variant="h5" component="h2">
               Create a GG account now!
             </Typography>
@@ -45,11 +37,17 @@ export default function AccountBenefits() {
               You can:
             </Typography>
             <Typography variant="body2" component="p">
-              Save games
+              Save games to your currently playing list
+              <br />
+              Keep track of play times
+              <br />
+              <br />
+              <i>to come:</i>
               <br />
               Rank games
               <br />
-              See play times
+              Game groups
+              <br />
             </Typography>
           </CardContent>
           <CardActions>

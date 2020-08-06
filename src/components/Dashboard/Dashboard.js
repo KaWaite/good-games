@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Typography, Grid, Divider, Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import CurrentList from "./CurrentList";
+import GameList from "./GameList";
 import Search from "../Search/Search";
 
 import "./styles.scss";
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard(props) {
+export default function Dashboard({ user, handleChange, submitSearch }) {
   const classes = useStyles();
 
   return (
@@ -30,20 +30,23 @@ export default function Dashboard(props) {
           className="dashboard-avatar"
         />
         <Typography variant="h3" component="h1">
-          {props.user.username}
+          {user.username}
         </Typography>
       </div>
       <div className="dashboard-content">
         <Grid container spacing={1}>
           <Grid item xs={12} sm={9} md={6}>
-            <CurrentList />
+            <GameList type="current" title="Currently Playing" total="5" />
+          </Grid>
+          <Grid item xs={12} sm={3} md={6}>
+            <GameList type="wish" title="Wishlist" total="10" />
           </Grid>
           <Grid item xs={12} sm={3} md={6}>
             <div className="content">
               <ul>
                 <Search
-                  handleChange={props.handleChange}
-                  submitSearch={props.submitSearch}
+                  handleChange={handleChange}
+                  submitSearch={submitSearch}
                   show={false}
                 />
                 <li>Groups</li>
@@ -60,7 +63,7 @@ export default function Dashboard(props) {
       </div>
       <Divider />
       {/* Redirect when token is absent or expired/invalid */}
-      {!props.user && <Redirect to="/login" />}
+      {!user && <Redirect to="/login" />}
     </div>
   );
 }

@@ -54,8 +54,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CurrentListItem(props) {
-  const { game, deleteGame, setUserGameData, ...rest } = props;
+export default function GameListItem({
+  game,
+  setGameListData,
+  deleteGame,
+  type,
+  ...rest
+}) {
   const gameInfo = game.game;
   const classes = useStyles();
 
@@ -74,16 +79,18 @@ export default function CurrentListItem(props) {
           </div>
           <div className={classes.column}>
             <Typography className={classes.secondaryHeading}>
-              Playing Time: {game.play_time} hours
+              {type === "current"
+                ? `Playing Time: ${game.play_time} hours`
+                : ""}
             </Typography>
           </div>
         </AccordionSummary>
         <AccordionDetails className={classes.details}>
-          <Link className={classes.columnLeft} to={`/game/${gameInfo.game_id}`}>
+          <Link className={classes.columnLeft} to={`/game/${gameInfo._id}`}>
             <img
               src={gameInfo.image_url}
               alt="cover"
-              className="current-list-item-image"
+              className="list-item-image"
             />
           </Link>
           <div className={clsx(classes.columnRight, classes.helper)}>
@@ -106,7 +113,8 @@ export default function CurrentListItem(props) {
             title={gameInfo.title}
             id={game._id}
             play_time={game.play_time}
-            setUserGameData={props.setUserGameData}
+            setGameListData={setGameListData}
+            type={type}
           />
         </AccordionActions>
       </Accordion>
