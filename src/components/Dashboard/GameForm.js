@@ -19,7 +19,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import GameCard from "../Results/GameCard";
 import Notice from "../Popups/Notice";
 
-export default function GameForm(props) {
+export default function GameForm({ gameListData, setGameListData, type }) {
   const [open, setOpen] = useState(false);
   const [showNotice, setShowNotice] = useState(null);
   const [noticeInfo, setNoticeInfo] = useState("");
@@ -78,9 +78,8 @@ export default function GameForm(props) {
   const addToCurrentGamesList = async (e) => {
     if (
       !formData ||
-      props.userGameData.filter(
-        (gamedata) => gamedata.game.title === formData.title
-      ).length > 0
+      gameListData.filter((gamedata) => gamedata.game.title === formData.title)
+        .length > 0
     ) {
       setNoticeInfo(
         <Typography className="game-form-notice" variant="body1">
@@ -89,7 +88,7 @@ export default function GameForm(props) {
         </Typography>
       );
       setShowNotice(true);
-    } else if (props.userGameData.length >= 5) {
+    } else if (gameListData.length >= 5) {
       setNoticeInfo(
         <Typography className="game-form-notice" variant="body1">
           Sorry, we only allow currently being played games to reach a{" "}
@@ -110,15 +109,24 @@ export default function GameForm(props) {
         };
         const updatedList = (
           await axios.post(
-            `${process.env.REACT_APP_API_URL}/user/add`,
+            `${process.env.REACT_APP_API_URL}/user/games/${type}/add`,
             formData,
             {
               headers: headers,
             }
           )
         ).data;
-        props.setUserGameData(updatedList);
-        handleClose();
+        if (typeof updatedList === "string") {
+          setNoticeInfo(
+            <Typography className="game-form-notice" variant="body1">
+              {updatedList}
+            </Typography>
+          );
+          setShowNotice(true);
+        } else {
+          setGameListData(updatedList);
+          handleClose();
+        }
         window.scrollTo(0, 0);
       } catch (err) {
         console.log(err);

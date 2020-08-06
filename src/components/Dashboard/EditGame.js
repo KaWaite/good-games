@@ -39,42 +39,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const ITEM_HEIGHT = 48;
-// const ITEM_PADDING_TOP = 8;
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-//       width: 250,
-//     },
-//   },
-// };
-
-// const trophyList = [
-//   "trophy 1",
-//   "trophy blah",
-//   "trophy hughh",
-//   "trophy boo",
-//   "trophy lu",
-//   "trophyz",
-//   "trophy over 9000",
-// ];
-
-// function getStyles(trophy, trophies, theme) {
-//   return {
-//     fontWeight:
-//       trophies.indexOf(trophy) === -1
-//         ? theme.typography.fontWeightRegular
-//         : theme.typography.fontWeightMedium,
-//   };
-// }
-
-export default function EditGame(props) {
+export default function EditGame({
+  title,
+  id,
+  play_time,
+  setGameListData,
+  type,
+}) {
   const [playTime, setPlayTime] = useState();
   const [trophies, setTrophies] = useState(["trophy1", "trophy blah"]);
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  //   const theme = useTheme();
 
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -101,10 +76,6 @@ export default function EditGame(props) {
     setOpen(false);
   };
 
-  //   const handleDelete = () => {
-  //     alert("DELETE");
-  //   };
-
   const handleSubmit = () => {
     updateGameData();
     handleClose();
@@ -117,20 +88,20 @@ export default function EditGame(props) {
         authorization: `Bearer ${localStorage.token}`,
       };
       const updatedData = {
-        _id: props.id,
+        _id: id,
         play_time: playTime,
         // trophies: trophies,
       };
       const results = (
         await axios.post(
-          `${process.env.REACT_APP_API_URL}/user/update/game`,
+          `${process.env.REACT_APP_API_URL}/user/games/${type}/update`,
           updatedData,
           {
             headers: headers,
           }
         )
       ).data;
-      props.setUserGameData(results);
+      setGameListData(results);
     } catch (err) {
       console.log(err);
     }
@@ -153,7 +124,7 @@ export default function EditGame(props) {
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>Update {props.title} info</DialogTitle>
+        <DialogTitle>Update {title} info</DialogTitle>
         <IconButton
           aria-label="close"
           style={{ position: "absolute", right: "3px", top: "3px" }}
@@ -169,7 +140,8 @@ export default function EditGame(props) {
               id="play_time"
               label="Play Time"
               margin="dense"
-              placeholder={props.play_time.toString()}
+              type="number"
+              placeholder={play_time.toString()}
               onChange={handleChange}
             />
 
