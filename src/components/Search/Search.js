@@ -16,34 +16,37 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search(props) {
+export default function Search({
+  show,
+  disableHide,
+  desc,
+  handleChange,
+  submitSearch,
+}) {
   const classes = useStyles();
-  const [show, setShow] = useState(props.show);
+  const [showButs, setShowButs] = useState(show);
 
   const showButtons = () => {
-    if (props.disableHide) return;
-    setShow(true);
+    if (disableHide) return;
+    setShowButs(true);
   };
 
   return (
     <div className="search-container">
-      {props.desc && (
+      {desc && (
         <Typography variant="body1" className="search-heading">
-          {props.desc}
+          {desc}
         </Typography>
       )}
 
       <div className={classes.root}>
-        <SearchInput
-          handleChange={props.handleChange}
-          showButtons={showButtons}
-        />
-        {show && (
+        <SearchInput handleChange={handleChange} showButtons={showButtons} />
+        {showButs && (
           <>
             <Button
               variant="contained"
               color="secondary"
-              onClick={props.submitSearch}
+              onClick={submitSearch}
               component={Link}
               to="results"
             >
