@@ -12,8 +12,9 @@ import {
   Typography,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
-import GameWikiAddGame from "./GameWikiAddGame";
+// import GameWikiAddGame from "./GameWikiAddGame";
 
 const useStyles = makeStyles((theme) => ({
   expand: {
@@ -51,14 +52,14 @@ export default function GameWikiTop(props) {
         title={title}
       />
       <CardActions>
-        <GameWikiAddGame title={title} />
-        {/* <IconButton
+        {/* <GameWikiAddGame title={title} /> */}
+        <IconButton
           aria-label="add to gamelist"
           title="Add to gamelist"
           onClick={() => alert("bing")}
         >
           <FavoriteIcon />
-        </IconButton> */}
+        </IconButton>
       </CardActions>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
