@@ -5,10 +5,10 @@ import ResultsOrNot from "./ResultsOrNot";
 
 import "./styles.scss";
 
-export default function Results(props) {
+export default function Results({ searchedTerm, setSearchedTerm }) {
   const [results, setResults] = useState([]);
   const [isDone, setIsDone] = useState(false);
-  let term = props.searchedTerm;
+  let term = searchedTerm;
 
   // useEffects
   useEffect(() => {
@@ -58,8 +58,7 @@ export default function Results(props) {
           <ResultsOrNot
             term={term}
             results={results}
-            handleChange={props.handleChange}
-            submitSearch={props.submitSearch}
+            setSearchedTerm={setSearchedTerm}
           />
         )}
       </div>

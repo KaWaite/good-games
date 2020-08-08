@@ -16,15 +16,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Search({
-  show,
-  disableHide,
-  desc,
-  handleChange,
-  submitSearch,
-}) {
+export default function Search({ show, disableHide, desc, setSearchedTerm }) {
   const classes = useStyles();
   const [showButs, setShowButs] = useState(show);
+  const [search, setSearch] = useState(null);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const submitSearch = () => {
+    setSearchedTerm(search);
+    setSearch(null);
+  };
 
   const showButtons = () => {
     if (disableHide) return;

@@ -15,9 +15,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ResultsOrNot(props) {
+export default function ResultsOrNot({ results, term, setSearchedTerm }) {
   const classes = useStyles();
-  const results = props.results;
 
   if (results.length > 0) {
     return (
@@ -48,10 +47,9 @@ export default function ResultsOrNot(props) {
     return (
       <div>
         <Search
-          desc={`Sorry, ${props.term} is not in our database. 
+          desc={`Sorry, ${term} is not in our database. 
           Please try again`}
-          handleChange={props.handleChange}
-          submitSearch={props.submitSearch}
+          setSearchedTerm={setSearchedTerm}
         />
       </div>
     );

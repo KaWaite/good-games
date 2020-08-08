@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Search from "../Search/Search";
 import { Typography } from "@material-ui/core";
 
-export default function Welcome(props) {
+export default function Welcome({ setSearchedTerm }) {
   useEffect(() => {
     window.scrollTo(0, 0);
     // eslint-disable-next-line
@@ -17,8 +17,7 @@ export default function Welcome(props) {
         </div>
         <Search
           desc="Search the Good Games database to get started."
-          handleChange={props.handleChange}
-          submitSearch={props.submitSearch}
+          setSearchedTerm={setSearchedTerm}
           show={true}
           disableHide={true}
         />

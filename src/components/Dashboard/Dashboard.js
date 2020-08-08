@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard({ user, handleChange, submitSearch }) {
+export default function Dashboard({ user, setSearchedTerm }) {
   const classes = useStyles();
 
   return (
@@ -44,11 +44,7 @@ export default function Dashboard({ user, handleChange, submitSearch }) {
           <Grid item xs={12} sm={3} md={6}>
             <div className="content">
               <ul>
-                <Search
-                  handleChange={handleChange}
-                  submitSearch={submitSearch}
-                  show={false}
-                />
+                <Search setSearchedTerm={setSearchedTerm} show={false} />
                 <li>Groups</li>
                 <li>Gaming Challenge</li>
                 <li>Best games of 2019</li>

@@ -43,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TopBar(props) {
+export default function TopBar({ username, setUser }) {
   const classes = useStyles();
 
   const logout = () => {
     localStorage.removeItem("token");
-    props.handleAuthorization();
+    setUser(null);
   };
 
   return (
@@ -65,7 +65,7 @@ export default function TopBar(props) {
           >
             <img src={logo} alt="good games logo" className="logo" />
           </Button>
-          {props.user ? (
+          {username ? (
             <>
               <Button
                 className="topbar-dashboard-btn"
@@ -76,7 +76,7 @@ export default function TopBar(props) {
               </Button>
               <div className={classes.grow} />
               <Typography variant="subtitle1" className="navbar-username">
-                <i>{props.user.username}</i>
+                <i>{username}</i>
               </Typography>
               <Divider orientation="vertical" className={classes.divider} />
               <Button onClick={logout} component={Link} to="/">

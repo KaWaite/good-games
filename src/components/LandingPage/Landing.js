@@ -5,13 +5,10 @@ import AccountBenefits from "./AccountBenefits";
 
 import "./styles.scss";
 
-export default function Landing(props) {
+export default function Landing({ setSearchedTerm }) {
   return (
     <div className="landing">
-      <Welcome
-        handleChange={props.handleChange}
-        submitSearch={props.submitSearch}
-      />
+      <Welcome setSearchedTerm={setSearchedTerm} />
       <Slogan />
       <AccountBenefits />
     </div>
